@@ -1,1 +1,90 @@
+/* Bakgrund */
+body {
+  margin: 0;
+  background-image: url("bakgrund.png"); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Poppins', sans-serif; /* bytte font pga blev snyggare*/
+  color: #fff;
+}
 
+/* Användeer vi inte nu skulle kunna fimpa eller lägga i head */
+.content {
+  display: grid;
+}
+
+
+.loga img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(163,92,78,0.8); 
+}
+
+/* Grid-container – (mobil) va tydligen viktigt */
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;     /* en kolumn på små skärmar */
+  grid-auto-rows: auto;
+  gap: 20px;
+  place-items: stretch;           /* fyll cellerna som standard */
+  padding: 1rem;
+}
+
+/* Grid-celler */
+.grid-item {
+  margin: 1em;                      /* margin inte behövs + gap räcker */
+  background-color: #2F4B3C;      
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* Större skärmar */
+@media only screen and (min-width: 800px) {
+  .gridContainer {
+    grid-template-columns: 2fr 1fr; /* två kolumner: vänster större */
+    align-items: start;
+    justify-items: stretch;
+  }
+
+  .item1 {
+    grid-row: 1;
+    grid-column: 1 / span 2;  /* över hela bredden */
+  }
+
+  .item2 {
+    grid-row: 2 / span 2;
+    grid-column: 1;           /* vänster kolumn */
+  }
+
+  .item3 {
+    grid-row: 2;
+    grid-column: 2;
+    border-radius: 20px;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.25),
+    10px 10px 70px rgba(0,0,0,0.25),
+    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.2),
+    inset -5px -5px 15px rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+}
+    border-radius: 25px;
+                       
+  }
+
+  .item4 {
+    grid-row: 3;
+    grid-column: 2;           /* höger kolumn */
+  }
+
+  .item5 {
+    grid-row: 4;
+    grid-column: 1 / -1;      /* FIX: spänn hela raden */
+  }
+
+  
+  
+}
