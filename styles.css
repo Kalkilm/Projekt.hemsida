@@ -20,8 +20,9 @@ body {
   height: 250px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 30px rgba(163,92,78,0.8); 
+  box-shadow: 0 0 30px rgba(245, 243, 242, 0.8); 
 }
+
 
 /* Grid-container – (mobil) va tydligen viktigt */
 .gridContainer {
@@ -31,6 +32,7 @@ body {
   gap: 20px;
   place-items: stretch;           /* fyll cellerna som standard */
   padding: 1rem;
+ 
 }
 
 /* Grid-celler */
@@ -40,6 +42,10 @@ body {
   color: #fff;
   padding: 1rem;
   border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
 }
 
 /* Större skärmar */
@@ -52,12 +58,29 @@ body {
 
   .item1 {
     grid-row: 1;
-    grid-column: 1 / span 2;  /* över hela bredden */
+    grid-column:1 / span 2;  /* över hela bredden */
+    border-radius: 20px;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.25),
+    10px 10px 70px rgba(0,0,0,0.25),
+    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.2),
+    inset -5px -5px 15px rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+    border-radius: 25px;
   }
 
   .item2 {
-    grid-row: 2 / span 2;
-    grid-column: 1;           /* vänster kolumn */
+    grid-row: 2;
+    grid-column: 1; 
+    border-radius: 20px;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.25),
+    10px 10px 70px rgba(0,0,0,0.25),
+    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.2),
+    inset -5px -5px 15px rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+    border-radius: 25px;          /* vänster kolumn */
+    width: 250px;
   }
 
   .item3 {
@@ -70,19 +93,34 @@ body {
     inset 5px 5px 20px rgba(255,255,255,0.2),
     inset -5px -5px 15px rgba(0,0,0,0.75);
     backdrop-filter: blur(5px);
-}
     border-radius: 25px;
                        
   }
 
   .item4 {
-    grid-row: 3;
-    grid-column: 2;           /* höger kolumn */
+    grid-row: 1;
+    grid-column: 1;           /* höger kolumn */
+    border-radius: 20px;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.25),
+    10px 10px 70px rgba(0,0,0,0.25),
+    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.2),
+    inset -5px -5px 15px rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+    border-radius: 25px;
   }
 
   .item5 {
     grid-row: 4;
     grid-column: 1 / -1;      /* FIX: spänn hela raden */
+    border-radius: 20px;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.25),
+    10px 10px 70px rgba(0,0,0,0.25),
+    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset 5px 5px 20px rgba(255,255,255,0.2),
+    inset -5px -5px 15px rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+    border-radius: 25px;
   }
 
   
