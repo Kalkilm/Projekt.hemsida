@@ -1,12 +1,13 @@
 /* Bakgrund */
 body {
-  margin: 0;
-  background-image: url("bilder/bakgrund.png"); 
+  margin: 1;
+  background-color: #fff;
+  /* background-image: url("bakgrund.png"); 
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed; */
   font-family: 'Poppins', sans-serif; /* bytte font pga blev snyggare*/
-  color: #fff;
+  color: #000000;
 }
 
 /* Användeer vi inte nu skulle kunna fimpa eller lägga i head */
