@@ -1,50 +1,43 @@
 <!DOCTYPE html>
 <html lang="sv">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NKK</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
 
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Material Symbols (för menu/menu_open) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
 <body>
 
+  <!-- NAVBAR hämtas in här, utseendet blir identiskt -->
+  <div id="navbar-container" data-nav="partials/navbar.html"></div>
+
   <div class="gridContainer">
-    <div class="item1">
-      <h1 id="NKK">NKK – Nerikes Kraftkarlar</h1>
-    </div>
     <div class="item2">
       <div class="loga">
-        <img src="bilder/NKK_svart_vit.png" alt="">
+        <img src="bilder/NKK_svart_vit.png" alt="NKK logga">
       </div>
-    
     </div>
-      <div class="item3">
-        <p>NKK är mer än ett gym – det är en gemenskap som samlas kring Örebros hjärta, universums mittpunkt:
-        <strong>Järntorget</strong>. Sedan starten 2024 har vi byggt en plats där styrka, vilja och sammanhållning går
-        hand i hand.</p>
 
-        <p>Här finns allt: tunga vikter, moderna maskiner – och självklart <strong>arga gubben på hörnet</strong> som
-        alltid har en åsikt men också ett hjärta av guld. Han är precis som vi: en del av den unika gemenskap som gör
-        NKK och Järntorget unikt.</p>
+    <div class="item3">
+      <p>NKK är mer än ett gym – det är en gemenskap som samlas kring Örebros hjärta, universums mittpunkt: <strong>Järntorget</strong>. Sedan starten 2024 har vi byggt en plats där styrka, vilja och sammanhållning går hand i hand.</p>
 
-        <p>Här handlar det inte bara om vikter och maskiner, utan om att lyfta varandra. Oavsett om du är nybörjare eller
-        en erfaren kraftkarl finns alltid någon som hejar på dig, pushar dig och delar resan mot dina mål.</p>
-      </div>
-    <div class="item4">
-      <nav>
-        <ul class="meny" id="menyLista">
-          <li><a href="index.html">Hem</a></li>
-          <li><a href="employees.html">Anställda</a></li>
-          <li><a href="contact.html" class="active">Kontakt</a></li>
-        </ul>
-      </nav>
+      <p>Här finns allt: tunga vikter, moderna maskiner – och självklart <strong>arga gubben på hörnet</strong> som alltid har en åsikt men också ett hjärta av guld. Han är precis som vi: en del av den unika gemenskap som gör NKK och Järntorget unikt.</p>
+
+      <p>Här handlar det inte bara om vikter och maskiner, utan om att lyfta varandra. Oavsett om du är nybörjare eller en erfaren kraftkarl finns alltid någon som hejar på dig, pushar dig och delar resan mot dina mål.</p>
     </div>
-    <div class="item5"><h3>NKK – För kraftkarlar i tiden.</h3></div>
+
+    <div class="item5">
+      <h3>NKK – För kraftkarlar i tiden.</h3>
+    </div>
   </div>
 
+  <!-- Ladda navbar-logiken -->
   
+  <!-- Behåll ditt gamla script bara om det gör annat än navbar, annars ta bort det för att undvika dubbel init -->
+  <script src="script.js" defer></script>
 </body>
-
 </html>
+
