@@ -1,0 +1,32 @@
+[
+    {
+        "titel": "Styrkelyftsappen",
+        "kund": "Flex Gym",
+        "beskrivning": "En app som hjälper medlemmar att logga sina lyft, följa träningsprogram och jämföra resultat."
+    },
+    {
+        "titel": "Webbportal för kostrådgivning",
+        "kund": "NutriPro",
+        "beskrivning": "En modern webbplats där klienter kan boka konsultationer och få skräddarsydda kostplaner."
+    },
+    {
+        "titel": "Digital medlemsbokning",
+        "kund": "Fit4Life",
+        "beskrivning": "System för att hantera bokningar av pass, med notiser och automatiska påminnelser."
+    },
+    {
+        "titel": "E-handel för gymutrustning",
+        "kund": "PowerShop",
+        "beskrivning": "En e-handelsplattform för att sälja gymutrustning med filter, sortering och kundvagnsfunktion."
+    },
+    {
+        "titel": "Hemsida för träningsläger",
+        "kund": "Nordic Strength",
+        "beskrivning": "En responsiv hemsida som presenterar träningsläger, program och bokningsmöjligheter."
+    },
+    {
+        "titel": "Blogg om styrketräning",
+        "kund": "Tyngre",
+        "beskrivning": "En bloggplattform där experter delar artiklar, tips och träningsrutiner."
+    }
+]

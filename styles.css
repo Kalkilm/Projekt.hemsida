@@ -1,102 +1,573 @@
-
-body { 
-  margin:0; 
-  background:#fff; 
-  font-family:'Poppins',system-ui,-apple-system,sans-serif; 
-  color:#000; 
+/* =========================
+   Base / Reset
+   ========================= */
+*,
+*::before,
+*::after,
+* {
+  box-sizing: border-box;
 }
 
-.logo-title { 
-  margin:0; 
-  color:#fff; 
-  font-size:1.25rem; 
+body {
+  margin: 0;
+  background: #fff;
+  color: #000;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif; /* behåll Poppins */
+  line-height: 1.6; /* tog med från din andra body-regel */
+}
+
+/* =========================
+   Header / Logo
+   ========================= */
+.logo-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.25rem;
 }
 
 /* Bild & item5 */
-.loga img { 
-  max-width:250px; 
-  height:auto; 
-  border-radius:50%; 
-  box-shadow:0 0 30px rgba(245,243,242,.8); 
+.loga img {
+  margin: 50px;
+  max-width: 250px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(245, 243, 242, .8);
 }
 
-.item5 { 
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  text-align:center; 
-}
+/* .item5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+} */
 
-/* Grid */
+/* =========================
+   Grid
+   ========================= */
 .gridContainer {
-   display:grid; 
-   gap:20px; 
-   padding:1rem;
+  display: grid;
+  gap: 20px;
+  padding: 1rem;
 }
 
-@media (min-width:800px) { 
-  .gridContainer{ grid-template-columns:2fr 1fr; } .item5{ grid-column:1 / -1; } }
+@media (min-width: 800px) {
+  .gridContainer { grid-template-columns: 2fr 1fr; }
+  .item5 { grid-column: 1 / -1; }
+}
 
-/* Navbar – enkel hover med padding */
+/* =========================
+   Navbar
+   ========================= */
 .navbar {
-  position:sticky; top:0; z-index:10;
-  display:flex; align-items:center; gap:12px;
-  justify-content:space-between;
-  background:rgba(47,75,60,.55);
-  backdrop-filter:blur(8px);
-  padding:.5rem 1rem;               
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 12px;
+  justify-content: space-between;
+  background:#2f4b3c;
+  backdrop-filter: blur(8px);
+  padding: .5rem 1rem;
   transition: padding .25s ease, background .25s ease;
 }
 .navbar:hover {
-  padding:1rem 1rem;                 
-  background:rgba(47,75,60,.65);
+  padding: 1rem 1rem;
+  background: #406250;
 }
-
 
 .menu-btn {
-  background:none; border:0; color:#fff; cursor:pointer;
-  padding:.5rem .75rem;
+  background: none; border: 0; color: #fff; cursor: pointer;
+  padding: .5rem .75rem;
 }
 
-.material-symbols-outlined { 
-   display: inline-block;
-  width: 32px;          
-  text-align: center;   
+/* Material Symbols – stabil ligatur + dina visuella värden */
+.material-symbols-outlined {
+  display: inline-block;
+  width: 32px;
+  text-align: center;
   font-size: 32px;
   color: #fff;
   line-height: 1;
+  /* ligatur/variations – lägg till för att undvika att texten "menu/close" syns */
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-feature-settings: 'liga';
+  text-transform: none;
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
 }
-  
 
-/* Menylista, den skapas av Js kolla där  */
+/* =========================
+   Meny (skapas av JS)
+   ========================= */
 .meny {
-  list-style:none; margin:0; padding:.5rem 1rem;
-  display:none; flex-direction:column; gap:12px;
+  list-style: none;
+  margin: 0;
+  padding: .5rem 1rem;
+  display: none; /* mobil: dold som standard */
+  flex-direction: column;
+  gap: 12px;
 }
-
-.meny.open { 
-  display:flex; }
+.meny.open { display: flex; }
 
 /* Länkar <a class="liItem"> */
 .meny .liItem {
-  text-decoration:none; color:#fff;
-  padding:10px 18px;
-  background:rgba(255,255,255,.08);
-  border-radius:8px;
-  transition:background .25s ease, box-shadow .25s ease;
+  text-decoration: none; color: #fff;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: background .25s ease, box-shadow .25s ease;
 }
 .meny .liItem:hover {
-  background:rgba(255,255,255,.2);
-  box-shadow:0 0 12px rgba(255,255,255,.6);
+  background: rgba(255,255,255,.2);
+  box-shadow: 0 0 12px rgba(255,255,255,.6);
+}
+
+/* =========================
+   Layoutcontainers
+   ========================= */
+.header-container,
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+}
+
+/* =========================
+   Typografi / Rubriker / Intro
+   ========================= */
+.title-1 {
+  margin: 1.5rem 0.5rem;
+  text-align: center;
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+}
+
+.intro {
+  max-width: 60ch;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: #374151;
+}
+
+.title-2 {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+/* =========================
+   TEAM – Grid
+   ========================= */
+.team-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}
+
+/* =========================
+   TEAM – Card
+   ========================= */
+.team-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+}
+
+.team-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1.25rem;
+  flex: 1;
+}
+
+.team-name {
+  margin: 0 0 .25rem;
+  font-size: 1.15rem;
+}
+
+.team-role {
+  margin: 0 0 .5rem;
+  color: black;
+  font-weight: 500;
+}
+
+.team-bio {
+  line-height: 1.5;
+  max-height: none;
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
+
+.btn {
+  margin-top: auto;
+  display: inline-block;
+  padding: .6rem 1rem;
+  background: #2f4b3c;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =========================
+   Footer
+   ========================= */
+.footer-container {
+  margin-top: 2rem;
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: .95rem;
+}
+
+/* =========================
+   TEAM – Desktop layout
+   ========================= */
+@media (min-width: 860px) {
+  .team-card {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    grid-template-rows: auto;
+  }
+  .team-img { height: 100%; }
+  .team-content { padding: 1.25rem 1.25rem 1.25rem 1rem; }
+}
+
+/* Bas */
+:root {
+  --bg: #ffffff;
+  --ink: #111827;
+  --muted: #6b7280;
+  --card: #fff;
+  --ring: #33A5F1;
 }
 
 
 
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Header (bild + text) */
+.profile-header {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  grid-template-columns: 240px 1fr;
+}
+
+.profile-photo {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+.profile-photo:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+  transform: scale(1.075);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.info {
+  margin: .25rem 0 0;
+  color: var(--muted);
+}
+
+/* Projektkort */
+#projects {
+  padding: 1rem;
+}
+
+.project-controls {
+  display: grid;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+#project-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.project-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: var(--card);
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+}
+
+.project-card h3 {
+  margin: .2rem 0 .4rem;
+}
+
+.project-meta {
+  margin: 0 0 .4rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.project-desc {
+  margin: 0;
+  color: #374151;
+}
+
+/* Bildspel */
+.slideshow {
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.slideshow h2 {
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.slides {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 16/9;
+  background: #f3f4f6;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .5rem;
+}
+
+.nav {
+  border: none;
+  border-radius: 10px;
+  padding: .5rem .8rem;
+  cursor: pointer;
+  background: #111827;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.nav:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: .4rem;
+  margin-top: .5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #d1d5db;
+}
+
+.dot.active {
+  background: #111827;
+}
+
+/* footer */
+.site-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #4b5563;
+  text-align: center;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+.site-footer .small {
+  font-size: .9rem;
+  color: #6b7280;
+}
+
+/*  Kontaktformulär  */
+
+  #contactForm {
+  display: flex;
+  flex-direction: column;    /* Lägger alla element i en kolumn */ 
+  gap: 0px;                 /* mellanrum mellan fälten */
+  padding: 30px;
+  background: #fff;          /* vit bakgrund */
+  border-radius: 10px;       /* rundade hörn */
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.5); /* rutan runt */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*  Fälten  */
+#contactForm label {
+  font-weight: bold;
+  margin: 5px;
+  display: block;           /* gör att label hamnar på egen rad */ 
+}
+
+#contactForm input,
+#contactForm textarea,
+#contactForm button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;    /* gör att padding räknas in i bredden */
+}
+
+/*  Textarea lite högre  */
+#contactForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/*  Knappen  */
+#contactForm button {
+  background: green;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background 0.5s;
+}
+
+.checkmark {
+  color: green;
+  vertical-align: middle;
+  display: none;
+  margin-left: 10px;
+}
+
+#contactForm button:hover {
+  background: #165e19;
+}
+
+/* .feedback-text {
+   color: black; Borde gå att ta standardfärgen?
+} */
+
+/* texten när fältet är giltigt */
+.feedback.valid .feedback-text {
+  color: green;
+  font-weight: 500;
+}
+
+/* texten när fälten är ogiltigt - vid knapptryck */
+.feedback.invalid .feedback-text {
+  color: red;
+  font-weight: 500;
+}
+
+/* synliggör checkmark */
+.checkmark.visible {
+  display: inline-block;
+}
+
+
+/* =========================
+   Extra responsivt: bildjustering
+   ========================= */
+@media (max-width: 700px){
+  .team-img{
+    object-position: 50% 18%;
+    height: 260px;
+  }
+}
+
+/* =========================
+   Navbar – Desktop overrides
+   ========================= */
 @media (min-width: 800px){
-  .navbar{ justify-content:space-between; gap:16px; }
-
-  .menu-btn{ display:none; }  
-
-  .meny{ display:flex !important; flex-direction:row; }
+  .navbar { justify-content: space-between; gap: 16px; } /* överstyr gap från 12 → 16 */
+  .menu-btn { display: none; }
+  .meny { display: flex !important; flex-direction: row; }
 }
 
+/* LÄGE 2: >= 700px — två kolumner på projekt + större headerbild  */
+@media (min-width: 700px) {
+  .profile-header {
+    grid-template-columns: 240px 1fr;
+    padding: 1.25rem 2rem;
+  }
+
+  .profile-photo {
+    width: 240px;
+    height: 240px;
+  }
+
+  #project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-controls {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+/* / LÄGE 3: >= 1000px — tre kolumner på projekt */
+@media (min-width: 1000px) {
+  #project-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

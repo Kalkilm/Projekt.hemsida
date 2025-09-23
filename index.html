@@ -11,33 +11,62 @@
 </head>
 <body>
 
-  <!-- NAVBAR hämtas in här, utseendet blir identiskt -->
+  <!-- NAVBAR -->
   <div id="navbar-container" data-nav="partials/navbar.html"></div>
 
-  <div class="gridContainer">
-    <div class="item2">
-      <div class="loga">
-        <img src="bilder/NKK_svart_vit.png" alt="NKK logga">
-      </div>
+  <!-- HEADER -->
+  <header>
+
+    <!-- Logga -->
+    <div class="loga" style="text-align:center; margin-bottom:1.5rem;">
+      <img src="bilder/NKK_svart_vit.png" alt="NKK logga" style="max-width:250px; height:auto;">
     </div>
 
-    <div class="item3">
-      <p>NKK är mer än ett gym – det är en gemenskap som samlas kring Örebros hjärta, universums mittpunkt: <strong>Järntorget</strong>. Sedan starten 2024 har vi byggt en plats där styrka, vilja och sammanhållning går hand i hand.</p>
-
-      <p>Här finns allt: tunga vikter, moderna maskiner – och självklart <strong>arga gubben på hörnet</strong> som alltid har en åsikt men också ett hjärta av guld. Han är precis som vi: en del av den unika gemenskap som gör NKK och Järntorget unikt.</p>
-
-      <p>Här handlar det inte bara om vikter och maskiner, utan om att lyfta varandra. Oavsett om du är nybörjare eller en erfaren kraftkarl finns alltid någon som hejar på dig, pushar dig och delar resan mot dina mål.</p>
+    <div class="header-container">
+      <h1 class="title-1">NKK – Nerikes Kraftkarlar</h1>
+      <p class="intro">Gemenskap, styrka och vilja – mitt i Örebro.</p>
     </div>
+  </header>
 
-    <div class="item5">
-      <h3>NKK – För kraftkarlar i tiden.</h3>
-    </div>
-  </div>
+  <!-- MAIN -->
+  <main class="main-container">
+    
 
-  <!-- Ladda navbar-logiken -->
-  
-  <!-- Behåll ditt gamla script bara om det gör annat än navbar, annars ta bort det för att undvika dubbel init -->
+    <!-- Textinnehåll -->
+    <p>
+      NKK är mer än ett gym – det är en gemenskap som samlas kring Örebros hjärta,
+      universums mittpunkt: <strong>Järntorget</strong>. Sedan starten 2024 har vi byggt en plats
+      där styrka, vilja och sammanhållning går hand i hand.
+    </p>
+
+    <p>
+      Här finns allt: tunga vikter, moderna maskiner – och självklart
+      <strong>arga gubben på hörnet</strong> som alltid har en åsikt men också ett hjärta av guld.
+      Han är precis som vi: en del av den unika gemenskap som gör NKK och Järntorget unikt.
+    </p>
+
+    <p>
+      Här handlar det inte bara om vikter och maskiner, utan om att lyfta varandra.
+      Oavsett om du är nybörjare eller en erfaren kraftkarl finns alltid någon som hejar på dig,
+      pushar dig och delar resan mot dina mål.
+    </p>
+
+    <h3 style="text-align:center; margin-top:2rem;">NKK – För kraftkarlar i tiden.</h3>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <address>
+      NKK Gym • Styrkegatan 1, Örebro •
+      <a href="tel:+4619123456">019-123 456</a> •
+      <a href="mailto:info@NKK.se">info@NKK.se</a>
+    </address>
+    <p>Öppettider: M–F 06–22 • L–S 08–20</p>
+    <p class="small">© <span id="year"></span> NKK</p>
+  </footer>
+
+  <!-- Scripts -->
   <script src="script.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
 </body>
 </html>
-

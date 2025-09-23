@@ -1,40 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Gör layouten responsiv på mobil-->
+  <meta name="description" content="Möt vårt team av tränare – bild, roll och länk till profilsidor."> <!--Detta syns när man exemepvis går in och ska söka på denna hemsidan på Google, då kommer denna text upp som ett alternativ.-->
+  <title>Vårt team - NKK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  
 </head>
 
 <body>
-    <header>
 
-    </header>
+    <div id="navbar-container" data-nav="partials/navbar.html"></div>
 
-     <div id="navbar-container" data-nav="partials/navbar.html"></div>
-
-    <div class="grid-container">
-        <div class="grid-item item1">
-            <h1>Teamet</h1>
-        </div>
-        <div class="grid-item item2"><img src="bilder/dog_gym.jpg" alt="En bild på en anställd"></div>
-        <div class="grid-item item3">
-            <p>Flex – Personlig tränare</p>
-            <p>
-                Flex är en engagerad och målinriktad tränare på vårt gym. Han är specialiserad på styrketräning och
-                hjälper medlemmar att utveckla sin teknik, bygga styrka och nå sina mål på ett säkert och hållbart sätt.
-                Med sin positiva inställning och känsla för detaljer skapar Flex en välkomnande träningsmiljö där alla
-                kan känna sig trygga och motiverade.
-            </p>
-        </div>
-        <div class="grid-item item4"></div>
-        <div class="grid-item item5"></div>
-
-
+  <header>
+    <div class="header-container"> <!--Begränsar maxbredd och centrerar innehåll-->
+      <h1 class="title-1">Vårt team</h1> <!--Sidans huvudrubrik (H1)-->
+      <p class="intro">Möt våra fyra stjärnor! Klicka på <em>Visa profil</em> för att läsa mer.</p>
     </div>
-</body>
+  </header>
 
+  <main class="main-container"> <!--Huvudinnehåll-->
+    <section>
+        <h2 class="title-2">Lista över tränare</h2> <!--Tematisk sektion med egen rubrik-->
+
+      <div class="team-grid"> <!--Grid-behållare som placerar korten i kolumner/rader-->
+
+        <article class="team-card"> <!--Kort 1: ett tränarkort (självständigt innehåll)-->
+          <img class="team-img" src="Johan.png" alt="Johan Palmqvist – personlig tränare"> <!--Bild + beskrivande alt-text-->
+          <div class="team-content"> <!--Textinnehållet i kortet-->
+            <h3 class="team-name">Johan Palmqvist</h3> <!--Namn i H3-rubrik-->
+            <p class="team-role">Personlig tränare – Styrka</p> <!--Roll-->
+            <p class="team-bio">Certifierad PT med fokus på styrka och teknik. Hjälper dig lyfta smartare och säkrare.</p> <!--Kort beskrivning-->
+            <a class="btn" href="Johan.html">Visa profil för Johan Palmqvist</a> <!--Länk till profilsidan-->
+          </div>
+        </article>
+
+        <article class="team-card"> <!--Kort 2: ett tränarkort (självständigt innehåll)-->
+          <img class="team-img" src="William.png" alt="William Björnsson – viktminskning & funktionell träning">
+          <div class="team-content">
+            <h3 class="team-name">William Björnsson</h3>
+            <p class="team-role">Coach – Viktminskning & funktionell träning</p>
+            <p class="team-bio">Erfaren coach som gör träningen rolig, effektiv och hållbar över tid.</p>
+            <a class="btn" href="William.html">Visa profil för William Björnsson</a>
+          </div>
+        </article>
+
+        <article class="team-card"> <!--Kort 3: ett tränarkort (självständigt innehåll)-->
+          <img class="team-img" src="Jonas.png" alt="Jonas Kuusinen – bodybuilding & styrkekondition">
+          <div class="team-content">
+            <h3 class="team-name">Jonas Kuusinen</h3>
+            <p class="team-role">Tränare – Bodybuilding & kondition</p>
+            <p class="team-bio">Bygger muskler med smart periodisering och personlig plan.</p>
+            <a class="btn" href="Jonas.html">Visa profil för Jonas Kuusinen</a>
+          </div>
+        </article>
+
+        <article class="team-card"> <!--Kort 4: ett tränarkort (självständigt innehåll)-->
+          <img class="team-img" src="WilhelmNy.png" alt="Wilhelm Längbo – gruppträning & funktionell fitness">
+          <div class="team-content">
+            <h3 class="team-name">Wilhelm Längbo</h3>
+            <p class="team-role">PT, Yoga instruktör – Funktionell fitness & grupp</p>
+            <p class="team-bio">Skapar peppiga pass och individanpassade upplägg som ger resultat och hälper individen att hitta sitt inre lugn, ljuset i mig ser ljuset i dig! Namaste.</p>
+            <a class="btn" href="Wilhelm.html">Visa profil för Wilhelm Längbo</a>
+          </div>
+        </article>
+      </div> <!--/team-grid-->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <address>
+      NKK Gym • Styrkegatan 1, Örebro •
+      <a href="tel:+4619123456">019-123 456</a> •
+      <a href="mailto:info@flexgym.se">info@NKK.se</a>
+    </address>
+    <p>Öppettider: M–F 06–22 • L–S 08–20</p>
+    <p class="small">© <span id="year"></span> Flex Gym</p>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+
+</body>
 </html>
