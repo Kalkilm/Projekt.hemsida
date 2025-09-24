@@ -252,21 +252,21 @@ body {
 }
 
 /* Bas */
-:root {
+/* :root {
   --bg: #ffffff;
   --ink: #111827;
   --muted: #6b7280;
   --card: #fff;
   --ring: #33A5F1;
-}
+} */
 
 
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--ink);
+  background:#ffffff;
+  color: #111827;
 }
 
 /* Header (bild + text) */
@@ -294,7 +294,7 @@ body {
 
 .info {
   margin: .25rem 0 0;
-  color: var(--muted);
+  color: #6b7280;
 }
 
 /* Projektkort */
@@ -316,7 +316,7 @@ body {
 .project-card {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  background: var(--card);
+  background: #fff;
   padding: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
 }
@@ -390,7 +390,7 @@ body {
 }
 
 .nav:focus {
-  outline: 2px solid var(--ring);
+  outline: 2px solid #33A5F1;
   outline-offset: 2px;
 }
 
