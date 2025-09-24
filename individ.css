@@ -71,6 +71,13 @@
   color: #374151;
 }
 
+
+.project-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+  transform: scale(1.01);
+  transition: box-shadow .3s ease, transform .5s ease;
+}
+
 /* Bildspel */
 .slideshow {
   padding: 1rem;
