@@ -12,8 +12,10 @@ body {
   margin: 0;
   background: #fff;
   color: #000;
-  font-family: 'Poppins', system-ui, -apple-system, sans-serif; /* behåll Poppins */
-  line-height: 1.6; /* tog med från din andra body-regel */
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  /* behåll Poppins */
+  line-height: 1.6;
+  /* tog med från din andra body-regel */
 }
 
 /* =========================
@@ -51,29 +53,42 @@ body {
 }
 
 @media (min-width: 800px) {
-  .gridContainer { grid-template-columns: 2fr 1fr; }
-  .item5 { grid-column: 1 / -1; }
+  .gridContainer {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .item5 {
+    grid-column: 1 / -1;
+  }
 }
 
 /* =========================
    Navbar
    ========================= */
 .navbar {
-  position: sticky; top: 0; z-index: 10;
-  display: flex; align-items: center; gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   justify-content: space-between;
-  background:#2f4b3c;
+  background: #2f4b3c;
   backdrop-filter: blur(8px);
   padding: .5rem 1rem;
   transition: padding .25s ease, background .25s ease;
 }
+
 .navbar:hover {
   padding: 1rem 1rem;
   background: #406250;
 }
 
 .menu-btn {
-  background: none; border: 0; color: #fff; cursor: pointer;
+  background: none;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
   padding: .5rem .75rem;
 }
 
@@ -100,15 +115,20 @@ body {
   list-style: none;
   margin: 0;
   padding: .5rem 1rem;
-  display: none; /* mobil: dold som standard */
+  display: none;
+  /* mobil: dold som standard */
   flex-direction: column;
   gap: 12px;
 }
-.meny.open { display: flex; }
+
+.meny.open {
+  display: flex;
+}
 
 /* Länkar <a class="liItem"> */
 .meny .liItem {
-  text-decoration: none; color: #fff;
+  text-decoration: none;
+  color: #fff;
   padding: 0.5rem 0.8rem;
   border: none;
   border-radius: 10px;
@@ -116,9 +136,10 @@ body {
   font-size: 1.25rem;
   transition: background .25s ease, box-shadow .25s ease;
 }
+
 .meny .liItem:hover {
-  background: rgba(255,255,255,.2);
-  box-shadow: 0 0 12px rgba(255,255,255,.6);
+  background: rgba(255, 255, 255, .2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, .6);
 }
 
 /* =========================
@@ -160,6 +181,7 @@ body {
   gap: 1.25rem;
   grid-template-columns: 1fr;
 }
+
 @media (min-width: 700px) {
   .team-grid {
     grid-template-columns: 1fr 1fr;
@@ -173,15 +195,16 @@ body {
 .team-card {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform .2s ease, box-shadow .2s ease;
 }
+
 .team-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
 }
 
 .team-img {
@@ -247,8 +270,14 @@ body {
     grid-template-columns: minmax(200px, 280px) 1fr;
     grid-template-rows: auto;
   }
-  .team-img { height: 100%; }
-  .team-content { padding: 1.25rem 1.25rem 1.25rem 1rem; }
+
+  .team-img {
+    height: 100%;
+  }
+
+  .team-content {
+    padding: 1.25rem 1.25rem 1.25rem 1rem;
+  }
 }
 
 /* Bas */
@@ -443,25 +472,32 @@ body {
 
 /*  Kontaktformulär  */
 
-  #contactForm {
+.contact-section {
+  min-height: 50%;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1rem;
+}
+
+#contactForm {
   display: flex;
-  flex-direction: column;    /* Lägger alla element i en kolumn */ 
-  gap: 0px;                 /* mellanrum mellan fälten */
+  flex-direction: column;
+  gap: 0px;
   padding: 30px;
-  background: #fff;          /* vit bakgrund */
-  border-radius: 10px;       /* rundade hörn */
-  box-shadow: 0px 4px 20px rgba(0,0,0,0.5); /* rutan runt */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  max-width: 520px;
+  width: 100%;
+  margin: 2rem auto;
 }
 
 /*  Fälten  */
 #contactForm label {
   font-weight: bold;
   margin: 5px;
-  display: block;           /* gör att label hamnar på egen rad */ 
+  display: block;
+  /* gör att label hamnar på egen rad */
 }
 
 #contactForm input,
@@ -472,7 +508,8 @@ body {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;    /* gör att padding räknas in i bredden */
+  box-sizing: border-box;
+  /* gör att padding räknas in i bredden */
 }
 
 /*  Textarea lite högre  */
@@ -523,12 +560,68 @@ body {
   display: inline-block;
 }
 
+.field-wrap {
+  position: relative;
+}
+
+/* visas endast när fältet är giltigt - */
+.field-wrap .checkmark {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: green;
+  display: none;
+  pointer-events: none;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+/* Flytta checkmark till höger */
+.checkbox-wrap .checkmark {
+  position: static;
+  display: none;
+  margin-left: 6px;
+}
+
+/* Visa checkmark när fältet är giltigt */
+.checkmark.visible {
+  display: inline-block;
+}
+
+/* Felmeddelanden */
+.feedback-text {
+  margin: 0.25rem 0 1rem;
+  font-size: 0.95rem;
+  color: red;
+  min-height: 1.1em;
+  /* behåll utrymmet även när det är tomt */
+}
+
+/* Feedback-texten grön när det är valid */
+.feedback-text.valid {
+  color: green;
+}
+
+/* Knappens utseende när den är disabled */
+#submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 /* =========================
    Extra responsivt: bildjustering
    ========================= */
-@media (max-width: 700px){
-  .team-img{
+@media (max-width: 700px) {
+  .team-img {
     object-position: 50% 18%;
     height: 260px;
   }
@@ -537,10 +630,21 @@ body {
 /* =========================
    Navbar – Desktop overrides
    ========================= */
-@media (min-width: 800px){
-  .navbar { justify-content: space-between; gap: 16px; } /* överstyr gap från 12 → 16 */
-  .menu-btn { display: none; }
-  .meny { display: flex !important; flex-direction: row; }
+@media (min-width: 800px) {
+  .navbar {
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  /* överstyr gap från 12 → 16 */
+  .menu-btn {
+    display: none;
+  }
+
+  .meny {
+    display: flex !important;
+    flex-direction: row;
+  }
 }
 
 /* LÄGE 2: >= 700px — två kolumner på projekt + större headerbild  */
