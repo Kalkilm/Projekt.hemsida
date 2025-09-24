@@ -1,75 +1,84 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 
 </head>
+
 <body>
-<div id="navbar-container" data-nav="partials/navbar.html"></div>
-     <header>
+    <div id="navbar-container" data-nav="partials/navbar.html"></div>
+    <header>
         <h1>Kontakta oss</h1>
     </header>
 
-<!-- Kontaktformulär -->
+    <!-- Kontaktformulär -->
     <main>
-        
-        
+
         <div class="contact-section">
-            <div>  
-            <form id="contactForm">
-<!-- Fältet för Namn -->
-                    <div class="contact-name">
-                        <label for="name">Namn:</label>
-                        <input type="text" id="name">
-                        <span id="nameFeedback"><small></small><i class="material-icons checkmark">check_circle</i></span>
+            <div>
+                <form id="contactForm" novalidate>
+                    <!-- Fältet för Namn -->
+                    <label for="name">Namn</label>
+                    <div class="field-wrap">
+                        <input id="name" name="name" type="text" placeholder="Ditt namn" required
+                            aria-describedby="nameHelp" />
+                        <span class="checkmark" id="nameCheck" aria-hidden="true">✓</span>
                     </div>
+                    <p id="nameHelp" class="feedback-text" aria-live="polite"></p>
 
-<!-- Fältet för Telefon -->
-                    <div class="contact-phone">
-                        <label for="phone">Telefon:</label>
-                        <input type="text" id="phone">
-                        <span id="phoneFeedback"><small>*Endast siffror</small><i class="material-icons checkmark">check_circle</i></span>
+                    <!-- Fältet för Telefon -->
+                    <label for="phone">Telefon</label>
+                    <div class="field-wrap">
+                        <input id="phone" name="phone" type="tel" placeholder="0701234567"
+                            aria-describedby="phoneHelp" />
+                        <span class="checkmark" id="phoneCheck" aria-hidden="true">✓</span>
                     </div>
+                    <p id="phoneHelp" class="feedback-text" aria-live="polite"></p>
+                    <!-- Fältet för E-post -->
+                    <label for="email">E-post</label>
+                    <div class="field-wrap">
+                        <input id="email" name="email" type="email" placeholder="exempel@mejl.se" required
+                            aria-describedby="emailHelp" />
+                        <span class="checkmark" id="emailCheck" aria-hidden="true">✓</span>
+                    </div>
+                    <p id="emailHelp" class="feedback-text" aria-live="polite"></p>
+                    <!-- Fältet för Meddelande -->
+                    <label for="message">Meddelande</label>
+                    <div class="field-wrap">
+                        <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" required
+                            aria-describedby="messageHelp"></textarea>
+                        <span class="checkmark" id="messageCheck" aria-hidden="true">✓</span>
+                    </div>
+                    <p id="messageHelp" class="feedback-text" aria-live="polite"></p>
+                    <!-- Skicka-knapp -->
+                    <button id="submitBtn" type="submit">Skicka</button>
 
-<!-- Fältet för E-post -->
-                    <div class="contact-email">
-                        <label for="email">E-post:</label>
-                        <input type="text" id="email">
-                        <span id="emailFeedback"><small>Giltig epost</small><i class="material-icons checkmark">check_circle</i></span>
-                    </div>
-
-<!-- Fältet för Meddelande -->
-                    <div class="contact-message">    
-                        <label for="message">Meddelande:</label>
-                        <textarea id="message"></textarea>
-                        <span id="messageFeedback"></span>
-                        <button type="submit">Skicka</button>
-                    </div>
-                        
+                    <!-- Feedback-meddelande för hela formuläret -->
+                    <p id="formFeedback" class="feedback" aria-live="polite"></p>
                 </form>
+
             </div>
-            
-            <p id="formFeedback" class="feedback"></p>
         </div>
-        
+
     </main>
 
     <footer class="site-footer">
-    <address>
-      NKK Gym • Styrkegatan 1, Örebro •
-      <a href="tel:+4619123456">019-123 456</a> •
-      <a href="mailto:info@flexgym.se">info@NKK.se</a>
-    </address>
-    <p>Öppettider: M–F 06–22 • L–S 08–20</p>
-    <p class="small">© <span id="year"></span> Flex Gym</p>
-  </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+        <address>
+            NKK Gym • Styrkegatan 1, Örebro •
+            <a href="tel:+4619123456">019-123 456</a> •
+            <a href="mailto:info@flexgym.se">info@NKK.se</a>
+        </address>
+        <p>Öppettider: M–F 06–22 • L–S 08–20</p>
+        <p class="small">© <span id="year"></span> Flex Gym</p>
+    </footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+    <script src="contact-validate.js" defer></script>
 
-    
 </body>
+
 </html>
