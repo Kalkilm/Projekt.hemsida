@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+
+/* Header (bild + text) */
+
+.profile-header {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  grid-template-columns: 240px 1fr;
+}
+
+.profile-photo {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+.profile-photo:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+  transform: scale(1.075);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.info {
+  margin: .25rem 0 0;
+  color: #6b7280;
+}
+
+/* Projektkort */
+#projects {
+  padding: 1rem;
+}
+
+.project-controls {
+  display: grid;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+#project-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.project-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+}
+
+.project-card h3 {
+  margin: .2rem 0 .4rem;
+}
+
+.project-meta {
+  margin: 0 0 .4rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.project-desc {
+  margin: 0;
+  color: #374151;
+}
+
+/* Bildspel */
+.slideshow {
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.slideshow h2 {
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.slides {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 16/9;
+  background: #f3f4f6;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .5rem;
+}
+
+.nav {
+  border: none;
+  border-radius: 10px;
+  padding: .5rem .8rem;
+  cursor: pointer;
+  background: #111827;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.nav:focus {
+  outline: 2px solid #33A5F1;
+  outline-offset: 2px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: .4rem;
+  margin-top: .5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #d1d5db;
+}
+
+.dot.active {
+  background: #111827;
+}
+
+/* LÄGE 2: >= 700px — två kolumner på projekt + större headerbild  */
+@media (min-width: 700px) {
+  .profile-header {
+    grid-template-columns: 240px 1fr;
+    padding: 1.25rem 2rem;
+  }
+
+  .profile-photo {
+    width: 240px;
+    height: 240px;
+  }
+
+  #project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-controls {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+/* / LÄGE 3: >= 1000px — tre kolumner på projekt */
+@media (min-width: 1000px) {
+  #project-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

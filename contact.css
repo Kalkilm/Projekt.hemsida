@@ -1,0 +1,145 @@
+/*  Kontaktformulär  */
+
+.contact-section {
+  min-height: 50%;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1rem;
+}
+
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  max-width: 520px;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+/*  Fälten  */
+#contactForm label {
+  font-weight: bold;
+  margin: 5px;
+  display: block;
+  /* gör att label hamnar på egen rad */
+}
+
+#contactForm input,
+#contactForm textarea,
+#contactForm button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  /* gör att padding räknas in i bredden */
+}
+
+/*  Textarea lite högre  */
+#contactForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/*  Knappen  */
+#contactForm button {
+  background: green;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background 0.5s;
+}
+
+.checkmark {
+  color: green;
+  vertical-align: middle;
+  display: none;
+  margin-left: 10px;
+}
+
+#contactForm button:hover {
+  background: #165e19;
+}
+
+/* .feedback-text {
+   color: black; Borde gå att ta standardfärgen?
+} */
+
+/* texten när fältet är giltigt */
+.feedback.valid .feedback-text {
+  color: green;
+  font-weight: 500;
+}
+
+/* texten när fälten är ogiltigt - vid knapptryck */
+.feedback.invalid .feedback-text {
+  color: red;
+  font-weight: 500;
+}
+
+/* synliggör checkmark */
+.checkmark.visible {
+  display: inline-block;
+}
+
+.field-wrap {
+  position: relative;
+}
+
+/* visas endast när fältet är giltigt - */
+.field-wrap .checkmark {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: green;
+  display: none;
+  pointer-events: none;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+/* Flytta checkmark till höger */
+.checkbox-wrap .checkmark {
+  position: static;
+  display: none;
+  margin-left: 6px;
+}
+
+/* Visa checkmark när fältet är giltigt */
+.checkmark.visible {
+  display: inline-block;
+}
+
+/* Felmeddelanden */
+.feedback-text {
+  margin: 0.25rem 0 1rem;
+  font-size: 0.95rem;
+  color: red;
+  min-height: 1.1em;
+  /* behåll utrymmet även när det är tomt */
+}
+
+/* Feedback-texten grön när det är valid */
+.feedback-text.valid {
+  color: green;
+}
+
+/* Knappens utseende när den är disabled */
+#submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

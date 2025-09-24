@@ -1,0 +1,131 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================
+   Layoutcontainers
+   ========================= */
+.header-container,
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+}
+
+
+/* =========================
+   TEAM – Grid
+   ========================= */
+.team-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 700px) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}
+
+/* =========================
+   TEAM – Card
+   ========================= */
+.team-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+}
+
+.team-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 1.25rem;
+  flex: 1;
+}
+
+.team-name {
+  margin: 0 0 .25rem;
+  font-size: 1.15rem;
+}
+
+.team-role {
+  margin: 0 0 .5rem;
+  color: black;
+  font-weight: 500;
+}
+
+.team-bio {
+  line-height: 1.5;
+  max-height: none;
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
+
+.btn {
+  margin-top: auto;
+  display: inline-block;
+  padding: .6rem 1rem;
+  background: #2f4b3c;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (min-width: 860px) {
+  .team-card {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    grid-template-rows: auto;
+  }
+
+  .team-img {
+    height: 100%;
+  }
+
+  .team-content {
+    padding: 1.25rem 1.25rem 1.25rem 1rem;
+  }
+}
+
+/* =========================
+   Extra responsivt: bildjustering
+   ========================= */
+@media (max-width: 700px) {
+  .team-img {
+    object-position: 50% 18%;
+    height: 260px;
+  }
+}
+
+@media (min-width: 700px) {
+    .team-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+    }
+
+    /* @media (min-width: 700px) – gäller bara skärmar ≥ 700px (mobile-first).
+    
+.team-grid { grid-template-columns: 1fr 1fr; } – två lika breda kolumner.
+align-items: stretch; – gör grid-items lika höga inom varje rad.*/
+}
