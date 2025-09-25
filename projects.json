@@ -28,5 +28,35 @@
         "titel": "Blogg om styrketräning",
         "kund": "Tyngre",
         "beskrivning": "En bloggplattform där experter delar artiklar, tips och träningsrutiner."
+    },
+    {
+        "titel": "App för träningsutmaningar",
+        "kund": "ChallengeFit",
+        "beskrivning": "En mobilapp där användare kan delta i styrketräningsutmaningar och följa sina framsteg."
+    },
+    {
+        "titel": "Online coaching plattform",
+        "kund": "CoachPro",
+        "beskrivning": "En plattform för personliga tränare att hantera klienter, schemalägga sessioner och dela träningsprogram."
+    },
+    {
+        "titel": "Fitness event hemsida",
+        "kund": "Strongman Events",
+        "beskrivning": "En hemsida för att marknadsföra och hantera anmälningar till styrkelyftstävlingar och event."
+    },
+    {
+        "titel": "Träningsvideo bibliotek",
+        "kund": "LiftTube",
+        "beskrivning": "En webbplats med ett omfattande bibliotek av träningsvideor, kategoriserade efter svårighetsgrad och typ av lyft."
+    },
+    {
+        "titel": "Kundhanteringssystem för gym",
+        "kund": "GymMaster",
+        "beskrivning": "Ett CRM-system för gym att hantera medlemskap, betalningar och kommunikation med medlemmar."
+    },
+    {
+        "titel": "Nutrition tracker app",
+        "kund": "NutriTrack",
+        "beskrivning": "En app för att logga matintag, räkna kalorier och följa näringsmål."
     }
 ]

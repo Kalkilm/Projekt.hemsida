@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // === 2) Skapa <nav class="navbar"> direkt ===
   container.innerHTML = `
     <nav class="navbar">
-      <h1 class="logo-title">NKK – Nerikes Kraftkarlar</h1>
+      <h1 class="logo-title">
+        <img class="logo" src="bilder/NKK_svart_vit.png" alt="NKK logga" />
+         NKK – Nerikes Kraftkarlar 
+      </h1>
+      
       <button id="menu-toggle" class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu">
         <span id="menu-icon" class="material-symbols-outlined">menu</span>
       </button>
@@ -287,3 +291,78 @@ async function loadProjects() {
 }
 // Ladda projekten när sidan är klar
 document.addEventListener("DOMContentLoaded", loadProjects);
+
+/* =========================================
+   Skillsbar – komplett drop-in
+   – Animerar först när sektionen syns i viewport
+   – Läser värden från data-percent (0–100)
+   – Sätter aria-attribut för tillgänglighet
+========================================= */
+(function () {
+  // Hitta alla skills på sidan
+  const skills = document.querySelectorAll('.skill');
+  if (!skills.length) return;
+
+  // Grundinit (ARIA + startläge)
+  skills.forEach(skill => {
+    const track = skill.querySelector('.skill-track');
+    const fill  = skill.querySelector('.skill-fill');
+    if (!track || !fill) return;
+
+    // Tillgänglighet
+    if (!track.hasAttribute('role')) track.setAttribute('role', 'progressbar');
+    track.setAttribute('aria-valuemin', '0');
+    track.setAttribute('aria-valuemax', '100');
+    track.setAttribute('aria-valuenow', '0');
+
+    // Startläge (matchar din CSS där width:0)
+    fill.style.width = '0%';
+  });
+
+  // Själva animationen för ett enskilt element
+  function animateSkill(skill) {
+    const track = skill.querySelector('.skill-track');
+    const fill  = skill.querySelector('.skill-fill');
+    if (!track || !fill) return;
+
+    const raw = Number(skill.dataset.percent);
+    const pct = Math.max(0, Math.min(100, Number.isFinite(raw) ? raw : 0));
+
+    fill.style.width = pct + '%';
+    track.setAttribute('aria-valuenow', String(pct));
+    skill.classList.add('animated'); // ifall du vill hooka CSS
+  }
+
+  // Observer: trigga animation när ~100% av elementet syns
+  function onIntersect(entries, obs) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      animateSkill(entry.target);
+      obs.unobserve(entry.target); // Kör bara en gång per skill
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(onIntersect, { threshold: 1 });
+    skills.forEach(s => io.observe(s));
+  } else {
+    // Fallback för äldre browsers: animera allt direkt vid load
+    window.addEventListener('load', () => skills.forEach(animateSkill), { once: true });
+  }
+
+  // (Valfritt) om sidan öppnas via bfcache (back/forward), säkerställ rätt läge
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      skills.forEach(skill => {
+        const fill = skill.querySelector('.skill-fill');
+        if (fill) fill.style.width = '0%';
+      });
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(onIntersect, { threshold: 0.3 });
+        skills.forEach(s => io.observe(s));
+      } else {
+        skills.forEach(animateSkill);
+      }
+    }
+  });
+})();

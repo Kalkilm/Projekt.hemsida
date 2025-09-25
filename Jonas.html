@@ -7,19 +7,19 @@
   <title>Min profilsida</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="individ.css">
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js" defer></script>
-  
+
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+  <!-- NAVBAR -->
   <div id="navbar-container"></div>
 
   <!-- Meny (samma struktur som i gemensamma delen) -->
-  
+
 
   <header class="profile-header">
     <img class="profile-photo" src="Jonas.png" alt="Flex – profilbild">
@@ -38,6 +38,46 @@
       <h2>Mina projekt</h2>
       <div id="project-list"></div>
       <!-- <p>Detta är info om mina projekt... </p> -->
+    </section>
+
+    <!-- Skillsbar -->
+    <section id="skills" class="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Kompetenser</h2>
+
+      <ul class="skills-list" role="list">
+        <li class="skill" data-percent="85">
+          <div class="skill-row">
+            <span class="skill-label">Styrka</span>
+            <span class="skill-value" aria-hidden="true">85%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="HTML" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+
+        <li class="skill" data-percent="75">
+          <div class="skill-row">
+            <span class="skill-label">Rörlighet</span>
+            <span class="skill-value" aria-hidden="true">75%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="CSS" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+
+        <li class="skill" data-percent="80">
+          <div class="skill-row">
+            <span class="skill-label">Kundbetyg</span>
+            <span class="skill-value" aria-hidden="true">80%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="JavaScript" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- Bildspel -->

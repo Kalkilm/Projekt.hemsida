@@ -55,13 +55,6 @@ body {
   box-shadow: 0 0 30px rgba(245, 243, 242, .8);
 }
 
-/* .item5 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-} */
-
 /* =========================
    Grid
    ========================= */
@@ -100,6 +93,15 @@ body {
   color: #fff;
   cursor: pointer;
   padding: .5rem .75rem;
+}
+
+.logo {
+   height:3em;          /* 3 × textens storlek */
+  width:auto;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;  /* rundar hörnen */
+  margin-right: 1rem;
 }
 
 /* Material Symbols – stabil ligatur + dina visuella värden */
