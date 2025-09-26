@@ -7,22 +7,20 @@
   <title>Min profilsida</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="individ.css">
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js" defer></script>
-  
+
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+  <!-- NAVBAR -->
   <div id="navbar-container"></div>
 
   <!-- Meny (samma struktur som i gemensamma delen) -->
-  
-
   <header class="profile-header">
-    <img class="profile-photo" src="Johan.png" alt="Flex – profilbild">
+    <img class="profile-photo" src="bilder/Johan.profil.png" alt="Profilbild">
     <div>
       <h1>Flex Finstrong</h1>
       <p class="info">
@@ -32,12 +30,100 @@
     </div>
   </header>
 
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about__grid">
+      <div class="about__content">
+        <h2 id="about-title">Om Jonas</h2>
+        <p>
+          Jag hjälper allt från nybörjare till tävlingslyftare att lyfta smartare – inte bara tyngre.
+          Min metod bygger på teknikförståelse, skonsam progression och mätbara delmål.
+        </p>
+        <div id="about-extra" class="about__more" hidden>
+          <p>
+            Under passen filmar vi nyckellyft, bryter ner rörelsen och bygger ett personligt fokuskort
+            för bänk/knäböj/mark. Varje block avslutas med en kort checkpoint där vi följer upp rörlighet,
+            toppset och RPE för att styra nästa block.
+          </p>
+          <p>
+            Utöver lyftarcoaching erbjuder jag workshops för lag/föreningar, samt distansupplägg med
+            veckovis feedback i video.
+          </p>
+        </div>
+
+        <button id="about-toggle" class="about__toggle" aria-controls="about-extra" aria-expanded="false">
+          Läs mer
+        </button>
+      </div>
+
+      <aside class="about__aside" aria-label="Snabbfakta">
+        <ul class="about__facts">
+          <li>Lic. PT & styrkecoach</li>
+          <li>Specialist: knäböj • bänkpress • marklyft</li>
+          <li>Videoanalys & fokuskort</li>
+          <li>Workshops & distans</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
   <main>
     <!-- Projekt (inläses från JSON) -->
     <section id="projects">
       <h2>Mina projekt</h2>
+
+      <!-- Filtreringsruta -->
+      <div class="project-controls" aria-label="Filtrera projekt">
+        <label for="project-q" class="visually-hidden">Filtrera</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <input id="project-q" type="search" placeholder="Sök i titel, kund eller beskrivning"
+            aria-describedby="project-count" />
+        </div>
+
+        <p id="project-count" class="info" aria-live="polite"></p>
+      </div>
       <div id="project-list"></div>
       <!-- <p>Detta är info om mina projekt... </p> -->
+    </section>
+
+    <!-- Skillsbar -->
+    <section id="skills" class="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Kompetenser</h2>
+
+      <ul class="skills-list" role="list">
+        <li class="skill" data-percent="85">
+          <div class="skill-row">
+            <span class="skill-label">Styrka</span>
+            <span class="skill-value" aria-hidden="true">85%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="HTML" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+
+        <li class="skill" data-percent="75">
+          <div class="skill-row">
+            <span class="skill-label">Rörlighet</span>
+            <span class="skill-value" aria-hidden="true">75%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="CSS" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+
+        <li class="skill" data-percent="80">
+          <div class="skill-row">
+            <span class="skill-label">Kundbetyg</span>
+            <span class="skill-value" aria-hidden="true">80%</span>
+          </div>
+          <div class="skill-track" role="progressbar" aria-label="JavaScript" aria-valuemin="0" aria-valuemax="100"
+            aria-valuenow="0">
+            <span class="skill-fill"></span>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <!-- Bildspel -->
@@ -55,7 +141,7 @@
       <div class="dots" id="dots"></div>
     </section>
 
-    <!-- Färdigheter -->
+   
   </main>
 
   <footer class="site-footer">
@@ -65,9 +151,8 @@
       <a href="mailto:info@flexgym.se">info@NKK.se</a>
     </address>
     <p>Öppettider: M–F 06–22 • L–S 08–20</p>
-    <p class="small">© <span id="year"></span> Flex Gym</p>
+    <p class="small">© 2025 NKK</p>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
 
 </body>
 

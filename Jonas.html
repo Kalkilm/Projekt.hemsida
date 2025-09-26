@@ -19,10 +19,8 @@
   <div id="navbar-container"></div>
 
   <!-- Meny (samma struktur som i gemensamma delen) -->
-
-
   <header class="profile-header">
-    <img class="profile-photo" src="Jonas.png" alt="Flex – profilbild">
+    <img class="profile-photo" src="bilder/Jonas.profil.png" alt="Flex – profilbild">
     <div>
       <h1>Flex Finstrong</h1>
       <p class="info">
@@ -32,10 +30,58 @@
     </div>
   </header>
 
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about__grid">
+      <div class="about__content">
+        <h2 id="about-title">Om Jonas</h2>
+        <p>
+          Jag hjälper allt från nybörjare till tävlingslyftare att lyfta smartare – inte bara tyngre.
+          Min metod bygger på teknikförståelse, skonsam progression och mätbara delmål.
+        </p>
+        <div id="about-extra" class="about__more" hidden>
+          <p>
+            Under passen filmar vi nyckellyft, bryter ner rörelsen och bygger ett personligt fokuskort
+            för bänk/knäböj/mark. Varje block avslutas med en kort checkpoint där vi följer upp rörlighet,
+            toppset och RPE för att styra nästa block.
+          </p>
+          <p>
+            Utöver lyftarcoaching erbjuder jag workshops för lag/föreningar, samt distansupplägg med
+            veckovis feedback i video.
+          </p>
+        </div>
+
+        <button id="about-toggle" class="about__toggle" aria-controls="about-extra" aria-expanded="false">
+          Läs mer
+        </button>
+      </div>
+
+      <aside class="about__aside" aria-label="Snabbfakta">
+        <ul class="about__facts">
+          <li>Lic. PT & styrkecoach</li>
+          <li>Specialist: knäböj • bänkpress • marklyft</li>
+          <li>Videoanalys & fokuskort</li>
+          <li>Workshops & distans</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
   <main>
     <!-- Projekt (inläses från JSON) -->
     <section id="projects">
       <h2>Mina projekt</h2>
+
+      <!-- Filtreringsruta -->
+      <div class="project-controls" aria-label="Filtrera projekt">
+        <label for="project-q" class="visually-hidden">Filtrera</label>
+        <div class="input-wrap">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <input id="project-q" type="search" placeholder="Sök i titel, kund eller beskrivning"
+            aria-describedby="project-count" />
+        </div>
+
+        <p id="project-count" class="info" aria-live="polite"></p>
+      </div>
       <div id="project-list"></div>
       <!-- <p>Detta är info om mina projekt... </p> -->
     </section>
@@ -95,7 +141,7 @@
       <div class="dots" id="dots"></div>
     </section>
 
-    <!-- Färdigheter -->
+   
   </main>
 
   <footer class="site-footer">
@@ -105,9 +151,8 @@
       <a href="mailto:info@flexgym.se">info@NKK.se</a>
     </address>
     <p>Öppettider: M–F 06–22 • L–S 08–20</p>
-    <p class="small">© <span id="year"></span> Flex Gym</p>
+    <p class="small">© 2025 NKK</p>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
 
 </body>
 

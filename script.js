@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   container.innerHTML = `
     <nav class="navbar">
       <h1 class="logo-title">
-        <img class="logo" src="bilder/NKK_svart_vit.png" alt="NKK logga" />
+        <img class="logo" src="bilder/NKK_svart.png" alt="NKK logga" />
          NKK – Nerikes Kraftkarlar 
       </h1>
       
@@ -21,18 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
     </nav>
   `;
 
-  const navbar    = container.querySelector(".navbar");
+  const navbar = container.querySelector(".navbar");
   const toggleBtn = container.querySelector("#menu-toggle");
-  const menuIcon  = container.querySelector("#menu-icon");
+  const menuIcon = container.querySelector("#menu-icon");
 
   if (navbar.dataset.init) return; // undvik dubbelinit
   navbar.dataset.init = "1";
 
   // === 3) Menypunkter ===
   const items = [
-    { text: "Hem",       href: "index.html" },
+    { text: "Hem", href: "index.html" },
     { text: "Anställda", href: "employees.html" },
-    { text: "Kontakt",   href: "contact.html" }
+    { text: "Kontakt", href: "contact.html" }
   ];
 
   const ul = document.createElement("ul");
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // === Hjälpfunktion: injicera Material Symbols-länken + CSS ===
-function injectMaterialSymbols(){
+function injectMaterialSymbols() {
   if (document.getElementById("ms-outlined")) return;
 
   // Länken till Google Fonts
@@ -123,7 +123,7 @@ function injectMaterialSymbols(){
  * - Ser till att <link rel="stylesheet" ...> för Material Symbols finns i <head>.
  * - Om den inte finns, skapar vi preconnect-länkar och självaste fontlänken.
  */
-function ensureMaterialSymbols(){
+function ensureMaterialSymbols() {
   const id = "material-symbols";
   if (document.getElementById(id)) return; // redan inladdad, gör inget
 
@@ -150,146 +150,181 @@ function ensureMaterialSymbols(){
 
 // Bildspel (prev/next, piltangenter, swipe, punkter) 
 (function initSlideshow() {
-    const slidesWrap = document.getElementById("slides");
-    if (!slidesWrap) return; // ingen slideshow på sidan
+  const slidesWrap = document.getElementById("slides");
+  if (!slidesWrap) return; // ingen slideshow på sidan
 
-    const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
-    const prevBtn = document.getElementById("prev");
-    const nextBtn = document.getElementById("next");
-    const dotsWrap = document.getElementById("dots");
+  const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+  const dotsWrap = document.getElementById("dots");
 
-    if (slides.length === 0) return;
+  if (slides.length === 0) return;
 
-    let index = 0;
-    let autoTimer = null;
-    const AUTO_MS = 5000; // ändra om du vill
+  let index = 0;
+  let autoTimer = null;
+  const AUTO_MS = 5000; // ändra om du vill
 
-    // Skapa prickar
-    slides.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.className = "dot" + (i === 0 ? " active" : "");
-        dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
-        dot.addEventListener("click", () => goTo(i, true));
-        dotsWrap.appendChild(dot);
+  // Skapa prickar
+  slides.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
+    dot.addEventListener("click", () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+
+  function setActive(newIndex) {
+    // bilder
+    slides.forEach((img, i) => {
+      img.classList.toggle("active", i === newIndex);
+      img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
+      // lazy-ish: ladda först när den snart ska visas (om du använder data-src)
+      if (i === newIndex && img.dataset.src && !img.src) {
+        img.src = img.dataset.src;
+      }
     });
+    // prickar
+    const allDots = Array.from(dotsWrap.children);
+    allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
+  }
 
-    function setActive(newIndex) {
-        // bilder
-        slides.forEach((img, i) => {
-            img.classList.toggle("active", i === newIndex);
-            img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
-            // lazy-ish: ladda först när den snart ska visas (om du använder data-src)
-            if (i === newIndex && img.dataset.src && !img.src) {
-                img.src = img.dataset.src;
-            }
-        });
-        // prickar
-        const allDots = Array.from(dotsWrap.children);
-        allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
-    }
-
-    function goTo(newIndex, pauseAuto = false) {
-        index = (newIndex + slides.length) % slides.length;
-        setActive(index);
-        if (pauseAuto) stopAuto();
-    }
-
-    function next(pause = false) { goTo(index + 1, pause); }
-    function prev(pause = false) { goTo(index - 1, pause); }
-
-    // Knapp-klick
-    prevBtn?.addEventListener("click", () => prev(true));
-    nextBtn?.addEventListener("click", () => next(true));
-
-    // Tangentbord (vänster/höger)
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") prev(true);
-        if (e.key === "ArrowRight") next(true);
-    });
-
-    // Touch-swipe
-    let startX = 0;
-    slidesWrap.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    slidesWrap.addEventListener("touchend", (e) => {
-        const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) {
-            dx > 0 ? prev(true) : next(true);
-        }
-    });
-
-    // Auto-play (valfritt)
-    function startAuto() {
-        if (autoTimer) return;
-        autoTimer = setInterval(() => next(false), AUTO_MS);
-    }
-    function stopAuto() {
-        clearInterval(autoTimer);
-        autoTimer = null;
-    }
-    // Pausa på hover (desktop)
-    slidesWrap.addEventListener("mouseenter", stopAuto);
-    slidesWrap.addEventListener("mouseleave", startAuto);
-
-    // Init
+  function goTo(newIndex, pauseAuto = false) {
+    index = (newIndex + slides.length) % slides.length;
     setActive(index);
-    startAuto();
+    if (pauseAuto) stopAuto();
+  }
+
+  function next(pause = false) { goTo(index + 1, pause); }
+  function prev(pause = false) { goTo(index - 1, pause); }
+
+  // Knapp-klick
+  prevBtn?.addEventListener("click", () => prev(true));
+  nextBtn?.addEventListener("click", () => next(true));
+
+  // Tangentbord (vänster/höger)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prev(true);
+    if (e.key === "ArrowRight") next(true);
+  });
+
+  // Touch-swipe
+  let startX = 0;
+  slidesWrap.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  slidesWrap.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      dx > 0 ? prev(true) : next(true);
+    }
+  });
+
+  // Auto-play (valfritt)
+  function startAuto() {
+    if (autoTimer) return;
+    autoTimer = setInterval(() => next(false), AUTO_MS);
+  }
+  function stopAuto() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+  // Pausa på hover (desktop)
+  slidesWrap.addEventListener("mouseenter", stopAuto);
+  slidesWrap.addEventListener("mouseleave", startAuto);
+
+  // Init
+  setActive(index);
+  startAuto();
 })();
 
 
 
 // script.js (Axios-version)
+// === Projektlista: enkel textfiltrering över befintliga kort ===
 const projectContainer = document.getElementById("project-list");
+const projectQ = document.getElementById("project-q");
+const projectCount = document.getElementById("project-count");
+let allProjects = [];
+
+const normalize = (s) =>
+  (s ?? "").toString().toLowerCase()
+    .normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
 function setStatus(msg) {
-    if (projectContainer) projectContainer.innerHTML = `<p class="status">${msg}</p>`;
+  if (projectContainer) projectContainer.innerHTML = `<p class="status">${msg}</p>`;
+  if (projectCount) projectCount.textContent = "";
 }
 
 function createProjectCard(proj) {
-    const card = document.createElement("article");
-    card.className = "project-card";
+  const card = document.createElement("article");
+  card.className = "project-card";
 
-    const h3 = document.createElement("h3");
-    h3.textContent = proj.titel || "Namnlöst projekt";
+  const h3 = document.createElement("h3");
+  h3.textContent = proj.titel || "Namnlöst projekt";
 
-    const meta = document.createElement("p");
-    meta.className = "project-meta";
-    meta.textContent = proj.kund ? `Kund: ${proj.kund}` : "Kund: –";
+  const meta = document.createElement("p");
+  meta.className = "project-meta";
+  meta.textContent = proj.kund ? `Kund: ${proj.kund}` : "Kund: –";
 
-    const desc = document.createElement("p");
-    desc.className = "project-desc";
-    desc.textContent = proj.beskrivning || "";
+  const desc = document.createElement("p");
+  desc.className = "project-desc";
+  desc.textContent = proj.beskrivning || "";
 
-    card.append(h3, meta, desc);
-    return card;
+  card.append(h3, meta, desc);
+  return card;
 }
 
 function renderProjects(list) {
-    if (!projectContainer) return;
-    projectContainer.innerHTML = "";
-    if (!list || list.length === 0) {
-        setStatus("Inga projekt hittades.");
-        return;
-    }
-    const frag = document.createDocumentFragment();
-    list.forEach(p => frag.appendChild(createProjectCard(p)));
-    projectContainer.appendChild(frag);
+  if (!projectContainer) return;
+  projectContainer.innerHTML = "";
+
+  if (!list || list.length === 0) {
+    setStatus("Inga projekt matchar din sökning.");
+    return;
+  }
+
+  const frag = document.createDocumentFragment();
+  list.forEach(p => frag.appendChild(createProjectCard(p)));
+  projectContainer.appendChild(frag);
+
+  if (projectCount) projectCount.textContent = `${list.length} projekt`;
+}
+
+function computeAndRender() {
+  const q = normalize(projectQ?.value.trim() || "");
+  const filtered = !q
+    ? allProjects
+    : allProjects.filter(p => {
+      const hay = normalize(`${p.titel} ${p.kund} ${p.beskrivning}`);
+      return hay.includes(q);
+    });
+  renderProjects(filtered);
+}
+
+function debounce(fn, ms = 150) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
 }
 
 async function loadProjects() {
-    try {
-        setStatus("Laddar projekt…");
-        const res = await axios.get("projects.json", { headers: { "Cache-Control": "no-cache" } });
-        const data = Array.isArray(res.data) ? res.data : [];
-        renderProjects(data);
-    } catch (err) {
-        console.error("[loadProjects] FEL:", err);
-        setStatus('Kunde inte ladda projekten. Kontrollera att sidan körs via en lokal server och att "jonas-projects.json" ligger i samma mapp.');
-    }
+  try {
+    setStatus("Laddar projekt…");
+    const res = await axios.get("projects.json", { headers: { "Cache-Control": "no-cache" } });
+    allProjects = Array.isArray(res.data) ? res.data : [];
+    computeAndRender();
+
+    // realtidsfilter
+    projectQ?.addEventListener("input", debounce(computeAndRender, 150));
+  } catch (err) {
+    console.error("[loadProjects] FEL:", err);
+    setStatus('Kunde inte ladda projekten. Kontrollera att sidan körs via en lokal server och att "projects.json" ligger i samma mapp.');
+  }
 }
-// Ladda projekten när sidan är klar
+
 document.addEventListener("DOMContentLoaded", loadProjects);
 
 /* =========================================
@@ -306,7 +341,7 @@ document.addEventListener("DOMContentLoaded", loadProjects);
   // Grundinit (ARIA + startläge)
   skills.forEach(skill => {
     const track = skill.querySelector('.skill-track');
-    const fill  = skill.querySelector('.skill-fill');
+    const fill = skill.querySelector('.skill-fill');
     if (!track || !fill) return;
 
     // Tillgänglighet
@@ -322,7 +357,7 @@ document.addEventListener("DOMContentLoaded", loadProjects);
   // Själva animationen för ett enskilt element
   function animateSkill(skill) {
     const track = skill.querySelector('.skill-track');
-    const fill  = skill.querySelector('.skill-fill');
+    const fill = skill.querySelector('.skill-fill');
     if (!track || !fill) return;
 
     const raw = Number(skill.dataset.percent);
@@ -366,3 +401,34 @@ document.addEventListener("DOMContentLoaded", loadProjects);
     }
   });
 })();
+
+/* =========================================
+        Längre beskrivning individ 
+  =========================================*/
+document.addEventListener('DOMContentLoaded', () => {
+  // Läs mer
+  const toggleBtn = document.querySelector('#about-toggle');
+  const more = document.querySelector('#about-extra');
+  const about = document.querySelector('.about');
+
+  if (toggleBtn && more && about) {
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      more.hidden = expanded;                 // visa/dölj för skärmläsare
+      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
+      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
+    });
+
+    // On-scroll reveal (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          about.classList.add('reveal');
+          io.unobserve(about);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(about);
+  }
+});
