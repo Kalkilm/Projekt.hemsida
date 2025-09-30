@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function validateName() {
         const val = nameInput.value.trim();
         if (val.length >= 2) {
-            showValid(nameInput, nameCheck, nameHelp, "ok, ta bort den här texten?");
+            showValid(nameInput, nameCheck, nameHelp, "");
             return true;
         } else {
             showInvalid(nameInput, nameCheck, nameHelp, "Ange minst 2 tecken.");
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const val = emailInput.value.trim();
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex för e-post
         if (re.test(val)) {
-            showValid(emailInput, emailCheck, emailHelp, "ok, ta bort den här texten?");
+            showValid(emailInput, emailCheck, emailHelp, "");
             return true;
         } else {
             showInvalid(emailInput, emailCheck, emailHelp, "Ange en giltig e-postadress.");
@@ -83,31 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const re = /^\d{7,12}$/; // 7–12 siffror
         if (re.test(onlyDigits)) {
-            showValid(phoneInput, phoneCheck, phoneHelp, "ok, ta bort den här texten?");
+            showValid(phoneInput, phoneCheck, phoneHelp, "");
             return true;
         } else {
             showInvalid(phoneInput, phoneCheck, phoneHelp, "Endast siffror, 7–12 tecken.");
             return false;
         }
     }
-
-    /* Meddelande-fält */
-    const messageInput = document.getElementById("message");
-    const messageCheck = document.getElementById("messageCheck");
-    const messageHelp = document.getElementById("messageHelp");
-
-    function validateMessage() {
-        const val = messageInput.value.trim();
-        if (val.length >= 10) {
-            showValid(messageInput, messageCheck, messageHelp, "ok, ta bort den här texten?");
-            return true;
-        } else {
-            showInvalid(messageInput, messageCheck, messageHelp, "Meddelandet bör vara minst 10 tecken.");
-            return false;
-        }
-    }
-
-    messageInput.addEventListener("input", validateMessage);
 
     // Realtidslyssnare
     phoneInput.addEventListener("input", validatePhone);
@@ -117,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const ok =
             validateName() &&
             validateEmail() &&
-            validateMessage() &&
             validatePhone();
         submitBtn.disabled = !ok; // knappen låses tills allt är korrekt
     }
@@ -133,14 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const ok =
             validateName() &&
             validateEmail() &&
-            validateMessage() &&
             validatePhone();
         if (!ok) {
             e.preventDefault(); // stoppa skick
             // sätt fokus på första fält som är fel
             if (nameInput.getAttribute("aria-invalid") === "true") nameInput.focus();
             else if (emailInput.getAttribute("aria-invalid") === "true") emailInput.focus();
-            else if (messageInput.getAttribute("aria-invalid") === "true") messageInput.focus();
             else if (phoneInput.getAttribute("aria-invalid") === "true") phoneInput.focus();
         }
     });
