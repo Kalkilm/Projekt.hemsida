@@ -29,6 +29,11 @@ body {
   margin: 0 0 1rem;
 }
 
+.title-3 {
+  text-align:center;
+  margin-top: 2rem;
+}
+
 .intro {
   max-width: 60ch;
   margin: 0 auto 2rem;
