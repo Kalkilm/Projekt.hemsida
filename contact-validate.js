@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         : showInvalid(phoneInput, phoneCheck, phoneHelp, msg);
     });
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     emailInput.addEventListener("blur", () => {
         touched.email = true;
@@ -140,6 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     ok = /^[\d-]{7,12}$/.test(cleanedValue);
     if (!ok) msg = "Endast siffror, 7–12 tecken.";
+=======
+    return ok;
+>>>>>>> Stashed changes
 =======
     return ok;
 >>>>>>> Stashed changes
