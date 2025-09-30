@@ -97,10 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const phoneCheck = document.getElementById("phoneCheck");
     const phoneHelp = document.getElementById("phoneHelp");
 
-    /*
-    tillåt mellanslag i skrivandet men validera siffror
-    Telefon ej obligatoriskt: inget fel när tomt
-    */
 
     function validatePhone(showUI = true) {
  const cleanedValue = phoneInput.value.replace(/\s+/g, "");
