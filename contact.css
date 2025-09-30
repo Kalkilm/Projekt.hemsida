@@ -6,10 +6,10 @@
 }
 
 #contactForm {
-  max-width: 680px;            
+  max-width: 300px;            
   width: 100%;
   margin: 1.5rem auto;         
-  padding: 20px;               
+  padding: 25px;               
   display: flex;
   flex-direction: column;
   background: white;
@@ -54,31 +54,13 @@
 
 .checkmark {
   color: green;
-  vertical-align: middle;
   display: none;
-  margin-left: 10px;
 }
 
 #contactForm button:hover {
   background: #165e19;
 }
 
-/* texten när fältet är giltigt */
-.feedback.valid .feedback-text {
-  color: green;
-  font-weight: 500;
-}
-
-/* texten när fälten är ogiltigt - vid knapptryck */
-.feedback.invalid .feedback-text {
-  color: red;
-  font-weight: 500;
-}
-
-/* synliggör checkmark */
-.checkmark.visible {
-  display: inline-block;
-}
 
 .field-wrap {
   position: relative;
@@ -91,27 +73,9 @@
   top: 50%;
   transform: translateY(-50%);
   font-weight: 700;
-  color: green;
-  display: none;
   pointer-events: none;
 }
 
-.checkbox-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 0.5rem;
-  position: relative;
-}
-
-/* Flytta checkmark till höger */
-.checkbox-wrap .checkmark {
-  position: static;
-  display: none;
-  margin-left: 6px;
-}
-
-/* Visa checkmark när fältet är giltigt */
 .checkmark.visible {
   display: inline-block;
 }
