@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!form) return;
 
     const submitBtn = document.getElementById("submitBtn");
-    const formFeedback = document.getElementById("formFeedback");
+    const touched = { name: false, email: false, phone: false };
+    let triedSubmit = false;      
 
     /* Hjälpfunktioner som används för alla fält */
     function showValid(field, checkEl, helpEl, message) {
@@ -22,43 +23,74 @@ document.addEventListener("DOMContentLoaded", () => {
         helpEl.classList.add("invalid");
     }
 
+    function updateSubmitStateSilent() {
+  const ok =
+    validateName(false) &&   // kör validering utan att rita UI
+    validateEmail(false) &&
+    validatePhone(false);
+  submitBtn.disabled = !ok;
+}
+
+
+    function maybeShow(shouldShow, drawFn) {
+    if (shouldShow) drawFn();
+    }     
+
     /* Namn-fält */
     const nameInput = document.getElementById("name");
     const nameCheck = document.getElementById("nameCheck");
     const nameHelp = document.getElementById("nameHelp");
 
-    function validateName() {
-        const val = nameInput.value.trim();
-        if (val.length >= 2) {
-            showValid(nameInput, nameCheck, nameHelp, "");
-            return true;
-        } else {
-            showInvalid(nameInput, nameCheck, nameHelp, "Ange minst 2 tecken.");
-            return false;
-        }
-    }
+    function validateName(showUI = true) {                       // CHANGED (la till showUI-parameter)
+    const val = nameInput.value.trim();                        // (samma logik)
+    const ok = val.length >= 2;                                // CHANGED (sparar i variabel)
+    maybeShow(showUI && (touched.name || triedSubmit), () => { // NEW (ritar UI villkorat)
+      ok ? showValid(nameInput, nameCheck, nameHelp, "")       // CHANGED (flyttat in i maybeShow)
+         : showInvalid(nameInput, nameCheck, nameHelp, "Ange minst 2 tecken."); // CHANGED (flyttat)
+    });
+    return ok;                                                 // CHANGED (returnerar ok alltid)
+  }
 
     // körs varje gång användaren skriver i fältet
-    nameInput.addEventListener("input", validateName);
+    nameInput.addEventListener("input", () => {
+        touched.name = true;
+        validateName(true);
+        updateSubmitStateSilent(); // uppdatera knappen utan att rita om fälten
+    });
+
+    nameInput.addEventListener("blur", () => {
+        touched.name = true;
+        validateName(true);
+        updateSubmitStateSilent(); // uppdatera knappen utan att rita om fälten
+    });
 
     /* E-post-fält */
     const emailInput = document.getElementById("email");
     const emailCheck = document.getElementById("emailCheck");
     const emailHelp = document.getElementById("emailHelp");
 
-    function validateEmail() {
+    function validateEmail(showUI = true) {                      
         const val = emailInput.value.trim();
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex för e-post
-        if (re.test(val)) {
-            showValid(emailInput, emailCheck, emailHelp, "");
-            return true;
-        } else {
-            showInvalid(emailInput, emailCheck, emailHelp, "Ange en giltig e-postadress.");
-            return false;
-        }
-    }
+        const ok = re.test(val);                                   // CHANGED
+    maybeShow(showUI && (touched.email || triedSubmit), () => { // NEW
+      ok ? showValid(emailInput, emailCheck, emailHelp, "")    // CHANGED
+         : showInvalid(emailInput, emailCheck, emailHelp, "Ange en giltig e-postadress."); // CHANGED
+    });
+    return ok;                                                 // CHANGED
+  }
 
-    emailInput.addEventListener("input", validateEmail);
+    emailInput.addEventListener("input", () => {
+        touched.email = true;
+        validateEmail(true);
+        updateSubmitStateSilent(); // uppdatera knappen utan att rita om fälten
+    });
+
+    emailInput.addEventListener("blur", () => {
+        touched.email = true;
+        validateEmail(true);
+        updateSubmitStateSilent(); // uppdatera knappen utan att rita om fälten
+    });
 
     /* Telefon-fält */
     const phoneInput = document.getElementById("phone");
@@ -70,47 +102,40 @@ document.addEventListener("DOMContentLoaded", () => {
     Telefon ej obligatoriskt: inget fel när tomt
     */
 
-    function validatePhone() {
-       
-        const onlyDigits = phoneInput.value.replace(/\s+/g, "");
-        if (onlyDigits === "") {
-           
-            phoneInput.removeAttribute("aria-invalid");
-            phoneCheck.classList.remove("visible");
-            phoneHelp.textContent = "";
-            phoneHelp.classList.remove("valid", "invalid");
-            return true;
-        }
-        const re = /^\d{7,12}$/; // 7–12 siffror
-        if (re.test(onlyDigits)) {
-            showValid(phoneInput, phoneCheck, phoneHelp, "");
-            return true;
-        } else {
-            showInvalid(phoneInput, phoneCheck, phoneHelp, "Endast siffror, 7–12 tecken.");
-            return false;
-        }
-    }
+    function validatePhone(showUI = true) {
+ const cleanedValue = phoneInput.value.replace(/\s+/g, "");
+  let ok = false, msg = "";
 
-    // Realtidslyssnare
-    phoneInput.addEventListener("input", validatePhone);
+  if (cleanedValue === "") {
+    ok = false; msg = "Telefonnummer är obligatoriskt.";
+  } else {
+    ok = /^[\d-]{7,12}$/.test(cleanedValue);
+    if (!ok) msg = "Endast siffror, 7–12 tecken.";
+  }
 
-    /* Submit-knappen */
-    function updateSubmitState() {
-        const ok =
-            validateName() &&
-            validateEmail() &&
-            validatePhone();
-        submitBtn.disabled = !ok; // knappen låses tills allt är korrekt
-    }
+  maybeShow(showUI && (touched.phone || triedSubmit), () => {
+    ok ? showValid(phoneInput, phoneCheck, phoneHelp, "")
+       : showInvalid(phoneInput, phoneCheck, phoneHelp, msg);
+  });
+  return ok;
+}
 
-    form.addEventListener("input", updateSubmitState);
-    form.addEventListener("change", updateSubmitState);
+phoneInput.addEventListener("input", () => {
+  touched.phone = true;
+  validatePhone(true);
+  updateSubmitStateSilent();
+});
+phoneInput.addEventListener("blur", () => {
+  touched.phone = true;
+  validatePhone(true);
+  updateSubmitStateSilent();
+});
 
-    // kör en första kontroll direkt när sidan laddas
-    updateSubmitState();
+updateSubmitStateSilent();
 
     /* Hantera när användaren trycker "Skicka" */
     form.addEventListener("submit", (e) => {
+        triedSubmit = true;
         const ok =
             validateName() &&
             validateEmail() &&
