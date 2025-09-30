@@ -1,8 +1,6 @@
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  // === 1) Se till att Material Symbols-fonten laddas ===
-  injectMaterialSymbols();
 
   const container = document.getElementById("navbar-container");
   if (!container) return;
@@ -85,32 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-
-// === Hjälpfunktion: injicera Material Symbols-länken + CSS ===
-function injectMaterialSymbols() {
-  if (document.getElementById("ms-outlined")) return;
-
-  // Länken till Google Fonts
-  const link = document.createElement("link");
-  link.id = "ms-outlined";
-  link.rel = "stylesheet";
-  link.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0";
-  document.head.appendChild(link);
-
-  // Minimal CSS så text → ikon funkar
-  const style = document.createElement("style");
-  style.textContent = `
-  .material-symbols-outlined {
-    font-family: "Material Symbols Outlined";
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    font-feature-settings: 'liga';
-    text-transform: none;
-    letter-spacing: normal;
-    line-height: 1;
-    display: inline-block;
-  }`;
-  document.head.appendChild(style);
-}
 
 
 /* ============================================================

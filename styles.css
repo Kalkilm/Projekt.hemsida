@@ -122,19 +122,21 @@ body {
 
 /* Material Symbols – stabil ligatur + dina visuella värden */
 .material-symbols-outlined {
-  display: inline-block;
-  width: 32px;
-  text-align: center;
-  font-size: 32px;
-  color: #fff;
-  line-height: 1;
-  /* ligatur/variations – lägg till för att undvika att texten "menu/close" syns */
+  font-family: "Material Symbols Outlined";
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   font-feature-settings: 'liga';
   text-transform: none;
   letter-spacing: normal;
+  line-height: 1;
+  display: inline-block;
+  /* valfritt – dina tidigare värden */
+  width: 32px;
+  text-align: center;
+  font-size: 32px;
+  color: #fff;
   -webkit-font-smoothing: antialiased;
 }
+
 
 /* =========================
    Meny (skapas av JS)
