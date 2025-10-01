@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   submitBtn.disabled = !ok;
 }
 
-
     function maybeShow(shouldShow, drawFn) {
     if (shouldShow) drawFn();
     }     
