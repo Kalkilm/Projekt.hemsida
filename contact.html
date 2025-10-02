@@ -7,66 +7,62 @@
     <title>Kontakt - NKK Gym</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="contact.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
     <script src="script.js" defer></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 
 <body>
-    <!-- NAVBAR -->
-<div id="navbar-container"></div>
+    <!-- NAVBAR --->
+    <div id="navbar-container"></div>
 
     <header>
+
         <h1 class="title-1">Kontakta oss</h1>
-        <p class="intro">Har du frågor om medlemskap, träning eller vill bara säga hej?<br>
+
+        <p class="intro">
+        Har du frågor om medlemskap, träning eller vill bara säga hej?<br>
         Fyll i formuläret nedan så återkommer vi så snart vi kan.</p>
+        
     </header>
 
     <!-- Kontaktformulär -->
-    <main>
 
-        <div class="contact-section">
-                <form id="contactForm" novalidate>
+            <form id="contactForm" novalidate>
 
-                    <!-- Fältet för Namn -->
-                    <label for="name">Namn</label>
-                    <div class="field-wrap">
-                        <input id="name" name="name" type="text" placeholder="Ditt namn" required aria-describedby="nameHelp" />
-                        <span class="checkmark" id="nameCheck" aria-hidden="true">✓</span>
-                    </div>
-                    <p id="nameHelp" class="feedback-text" aria-live="polite"></p>
+                <!-- Fältet för Namn -->
+                <label for="name">Namn</label>
+                <div class="field-wrap">
+                    <input id="name" name="name" type="text" placeholder="Ditt namn" required aria-describedby="nameHelp" />
+                    <span class="checkmark" id="nameCheck" aria-hidden="true">✓</span>
+                </div>
+                <p id="nameHelp" class="feedback-text" aria-live="polite"></p>
 
-                    <!-- Fältet för Telefon -->
-                    <label for="phone">Telefon</label>
-                    <div class="field-wrap">
-                        <input id="phone" name="phone" type="text" placeholder="070-123 45 67" aria-describedby="phoneHelp" />
-                        <span class="checkmark" id="phoneCheck" aria-hidden="true">✓</span>
-                    </div>
-                    <p id="phoneHelp" class="feedback-text" aria-live="polite"></p>
+                <!-- Fältet för Telefon -->
+                <label for="phone">Telefon</label>
+                <div class="field-wrap">
+                    <input id="phone" name="phone" type="text" placeholder="070-123 45 67" required aria-describedby="phoneHelp" />
+                    <span class="checkmark" id="phoneCheck" aria-hidden="true">✓</span>
+                </div>
+                <p id="phoneHelp" class="feedback-text" aria-live="polite"></p>
 
-                    <!-- Fältet för E-post -->
-                    <label for="email">E-post</label>
-                    <div class="field-wrap">
-                        <input id="email" name="email" type="text" placeholder="exempel@mejl.se" required aria-describedby="emailHelp" />
-                        <span class="checkmark" id="emailCheck" aria-hidden="true">✓</span>
-                    </div>
-                    <p id="emailHelp" class="feedback-text" aria-live="polite"></p>
+                <!-- Fältet för E-post -->
+                <label for="email">E-post</label>
+                <div class="field-wrap">
+                    <input id="email" name="email" type="text" placeholder="exempel@mejl.se" required aria-describedby="emailHelp" />
+                    <span class="checkmark" id="emailCheck" aria-hidden="true">✓</span>
+                </div>
+                <p id="emailHelp" class="feedback-text" aria-live="polite"></p>
 
-                    <!-- Fältet för Meddelande -->
-                    <label for="message">Meddelande</label>
-                    <div class="field-wrap">
-                        <textarea id="message" name="message" placeholder="Skriv ditt meddelande här"></textarea>
-                    </div>
+                <!-- Fältet för Meddelande -->
+                <label for="message">Meddelande</label>
+                <div class="field-wrap">
+                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här"></textarea>
+                </div>
 
-                    <!-- Skicka-knapp -->
-                    <button id="submitBtn" type="submit">Skicka</button>
+                <!-- Skicka-knapp -->
+                <button id="submitBtn" type="submit">Skicka</button>
 
-
-                </form>
-        </div>
-
-    </main>
+            </form>
 
     <footer class="site-footer">
         <address>
@@ -79,6 +75,6 @@
     </footer>
     <script src="contact-validate.js" defer></script>
 
-    </body>
+</body>
 
 </html>
