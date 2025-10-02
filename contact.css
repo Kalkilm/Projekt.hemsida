@@ -85,11 +85,6 @@
   line-height: 1.2; /* behåller "tomma" utrymmet även när det är tomt, undivker att det hoppar */
 }
 
-/* Feedback-texten grön när det är valid */
-.feedback-text.valid {
-  color: green;
-}
-
 /* Knappens utseende när den är disabled */
 #submitBtn:disabled {
   opacity: 0.5;
