@@ -1,11 +1,9 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("navbar-container");
   if (!container) return;
 
-  // === 2) Skapa <nav class="navbar"> direkt ===
+  // === Skapa <nav class="navbar"> direkt ===
   container.innerHTML = `
     <nav class="navbar">
       <h1 class="logo-title">
@@ -26,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (navbar.dataset.init) return; // undvik dubbelinit
   navbar.dataset.init = "1";
 
-  // === 3) Menypunkter ===
+  // === Menypunkter ===
   const items = [
     { text: "Hem", href: "index.html" },
     { text: "Anställda", href: "employees.html" },
@@ -56,14 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   navbar.appendChild(ul);
 
-  // === 4) Toggle-logik för mobil ===
+  // === Toggle-logik för mobil ===
   toggleBtn?.addEventListener("click", () => {
     const open = ul.classList.toggle("open");
     if (menuIcon) menuIcon.textContent = open ? "menu_open" : "menu";
     toggleBtn.setAttribute("aria-expanded", String(open));
   });
 
-  // === 5) Stäng menyn efter klick ===
+  // === Stäng menyn efter klick ===
   ul.addEventListener("click", (e) => {
     if (e.target.matches(".liItem") && ul.classList.contains("open")) {
       ul.classList.remove("open");
@@ -117,6 +115,39 @@ function ensureMaterialSymbols() {
   font.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0";
   document.head.appendChild(font);
 }
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Beskrivning individ "LÄS MER" */
+  
+document.addEventListener('DOMContentLoaded', () => {
+  // Läs mer
+  const toggleBtn = document.querySelector('#about-toggle');
+  const more = document.querySelector('#about-extra');
+  const about = document.querySelector('.about');
+
+  if (toggleBtn && more && about) {
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      more.hidden = expanded;                 // visa/dölj för skärmläsare
+      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
+      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
+    });
+
+    // On-scroll reveal (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          about.classList.add('reveal');
+          io.unobserve(about);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(about);
+  }
+});
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Bildspel (prev/next, piltangenter, swipe, punkter) 
 (function initSlideshow() {
@@ -208,6 +239,7 @@ function ensureMaterialSymbols() {
   startAuto();
 })();
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // script.js (Axios-version)
 // === Projektlista: enkel textfiltrering över befintliga kort ===
 
@@ -315,6 +347,8 @@ async function loadProjects() {
 // Startpunkten: när HTML laddats, hämta projekten
 document.addEventListener("DOMContentLoaded", loadProjects);
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 /* =========================================
    Skillsbar – komplett drop-in
    – Animerar först när sektionen syns i viewport
@@ -390,33 +424,3 @@ document.addEventListener("DOMContentLoaded", loadProjects);
   });
 })();
 
-/* =========================================
-        Beskrivning individ 
-  =========================================*/
-document.addEventListener('DOMContentLoaded', () => {
-  // Läs mer
-  const toggleBtn = document.querySelector('#about-toggle');
-  const more = document.querySelector('#about-extra');
-  const about = document.querySelector('.about');
-
-  if (toggleBtn && more && about) {
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      more.hidden = expanded;                 // visa/dölj för skärmläsare
-      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
-      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
-    });
-
-    // On-scroll reveal (IntersectionObserver)
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          about.classList.add('reveal');
-          io.unobserve(about);
-        }
-      });
-    }, { threshold: 0.2 });
-    io.observe(about);
-  }
-});
