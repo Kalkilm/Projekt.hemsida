@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 /* ============================================================
    Helpers nedan: laddar Google-fonten "Material Symbols" via JS
    samt injicerar en minimal CSS-regel för ligaturbeteendet.
@@ -118,7 +117,6 @@ function ensureMaterialSymbols() {
   font.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0";
   document.head.appendChild(font);
 }
-
 
 // Bildspel (prev/next, piltangenter, swipe, punkter) 
 (function initSlideshow() {
@@ -205,40 +203,49 @@ function ensureMaterialSymbols() {
   slidesWrap.addEventListener("mouseenter", stopAuto);
   slidesWrap.addEventListener("mouseleave", startAuto);
 
-  // Init
+  // Initiera
   setActive(index);
   startAuto();
 })();
 
-
-
 // script.js (Axios-version)
 // === Projektlista: enkel textfiltrering över befintliga kort ===
+
+// Hämtar referenser till tre element i HTML: listbehållaren, sökfältet och räknaren.
 const projectContainer = document.getElementById("project-list");
 const projectQ = document.getElementById("project-q");
 const projectCount = document.getElementById("project-count");
-let allProjects = [];
+let allProjects = []; // Här sparas alla projekt som läses in från projects.json
 
+// normalize: gör sökningar robusta
+// - gör om till sträng, små bokstäver
+// - normaliserar Unicode (NFD) så å/ä/ö bryts upp i a + diakritik
+// - tar bort diakritiska tecken (så "Å" matchar "a")
 const normalize = (s) =>
   (s ?? "").toString().toLowerCase()
     .normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
+// Visar en statusrad i listbehållaren och nollställer räknaren
 function setStatus(msg) {
   if (projectContainer) projectContainer.innerHTML = `<p class="status">${msg}</p>`;
   if (projectCount) projectCount.textContent = "";
 }
 
+// Bygger ett “kort” (article) för ett projekt-objekt { titel, kund, beskrivning }
 function createProjectCard(proj) {
   const card = document.createElement("article");
   card.className = "project-card";
 
+  // titeln
   const h3 = document.createElement("h3");
   h3.textContent = proj.titel || "Namnlöst projekt";
 
+  // kund
   const meta = document.createElement("p");
   meta.className = "project-meta";
   meta.textContent = proj.kund ? `Kund: ${proj.kund}` : "Kund: –";
 
+  // beskrivning
   const desc = document.createElement("p");
   desc.className = "project-desc";
   desc.textContent = proj.beskrivning || "";
@@ -247,33 +254,40 @@ function createProjectCard(proj) {
   return card;
 }
 
+// Renderar en lista av projekt i DOM:en
 function renderProjects(list) {
   if (!projectContainer) return;
   projectContainer.innerHTML = "";
 
+  // Tom träfflista -> visa statusmeddelande
   if (!list || list.length === 0) {
     setStatus("Inga projekt matchar din sökning.");
     return;
   }
 
+  // DocumentFragment minskar “omritningar” (performance)
   const frag = document.createDocumentFragment();
   list.forEach(p => frag.appendChild(createProjectCard(p)));
   projectContainer.appendChild(frag);
 
+  // Uppdatera räknaren
   if (projectCount) projectCount.textContent = `${list.length} projekt`;
 }
 
+// Läser söksträng, filtrerar allProjects och renderar resultatet
 function computeAndRender() {
   const q = normalize(projectQ?.value.trim() || "");
   const filtered = !q
-    ? allProjects
+    ? allProjects // tom söksträng -> visa allt
     : allProjects.filter(p => {
+      // “höstack”: titel + kund + beskrivning i en sträng, normaliserad
       const hay = normalize(`${p.titel} ${p.kund} ${p.beskrivning}`);
-      return hay.includes(q);
+      return hay.includes(q); // enkel substring-matchning
     });
   renderProjects(filtered);
 }
 
+// debounce: väntar X ms efter senaste tangenttryck innan filtrering körs
 function debounce(fn, ms = 150) {
   let t;
   return (...args) => {
@@ -282,6 +296,7 @@ function debounce(fn, ms = 150) {
   };
 }
 
+// Hämtar projects.json via Axios, sparar inläst data och aktiverar realtidsfilter
 async function loadProjects() {
   try {
     setStatus("Laddar projekt…");
@@ -289,7 +304,7 @@ async function loadProjects() {
     allProjects = Array.isArray(res.data) ? res.data : [];
     computeAndRender();
 
-    // realtidsfilter
+    // Realtidsfilter: lyssna på input men “debounca” för bättre flyt
     projectQ?.addEventListener("input", debounce(computeAndRender, 150));
   } catch (err) {
     console.error("[loadProjects] FEL:", err);
@@ -297,6 +312,7 @@ async function loadProjects() {
   }
 }
 
+// Startpunkten: när HTML laddats, hämta projekten
 document.addEventListener("DOMContentLoaded", loadProjects);
 
 /* =========================================
@@ -375,7 +391,7 @@ document.addEventListener("DOMContentLoaded", loadProjects);
 })();
 
 /* =========================================
-        Längre beskrivning individ 
+        Beskrivning individ 
   =========================================*/
 document.addEventListener('DOMContentLoaded', () => {
   // Läs mer
