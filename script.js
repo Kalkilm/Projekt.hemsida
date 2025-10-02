@@ -192,7 +192,7 @@ function ensureMaterialSymbols() {
     }
   });
 
-  // Auto-play (valfritt)
+  // Auto-play
   function startAuto() {
     if (autoTimer) return;
     autoTimer = setInterval(() => next(false), AUTO_MS);
