@@ -115,129 +115,6 @@ function ensureMaterialSymbols() {
   font.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0";
   document.head.appendChild(font);
 }
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-/* Beskrivning individ "LÄS MER" */
-  
-document.addEventListener('DOMContentLoaded', () => {
-  // Läs mer
-  const toggleBtn = document.querySelector('#about-toggle');
-  const more = document.querySelector('#about-extra');
-  const about = document.querySelector('.about');
-
-  if (toggleBtn && more && about) {
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      more.hidden = expanded;                 // visa/dölj för skärmläsare
-      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
-      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
-    });
-
-    // On-scroll reveal (IntersectionObserver)
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          about.classList.add('reveal');
-          io.unobserve(about);
-        }
-      });
-    }, { threshold: 0.2 });
-    io.observe(about);
-  }
-});
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// Bildspel (prev/next, piltangenter, swipe, punkter) 
-(function initSlideshow() {
-  const slidesWrap = document.getElementById("slides");
-  if (!slidesWrap) return; // ingen slideshow på sidan
-
-  const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
-  const prevBtn = document.getElementById("prev");
-  const nextBtn = document.getElementById("next");
-  const dotsWrap = document.getElementById("dots");
-
-  if (slides.length === 0) return;
-
-  let index = 0;
-  let autoTimer = null;
-  const AUTO_MS = 5000; // ändra om du vill
-
-  // Skapa prickar
-  slides.forEach((_, i) => {
-    const dot = document.createElement("button");
-    dot.className = "dot" + (i === 0 ? " active" : "");
-    dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
-    dot.addEventListener("click", () => goTo(i, true));
-    dotsWrap.appendChild(dot);
-  });
-
-  function setActive(newIndex) {
-    // bilder
-    slides.forEach((img, i) => {
-      img.classList.toggle("active", i === newIndex);
-      img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
-      // lazy-ish: ladda först när den snart ska visas (om du använder data-src)
-      if (i === newIndex && img.dataset.src && !img.src) {
-        img.src = img.dataset.src;
-      }
-    });
-    // prickar
-    const allDots = Array.from(dotsWrap.children);
-    allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
-  }
-
-  function goTo(newIndex, pauseAuto = false) {
-    index = (newIndex + slides.length) % slides.length;
-    setActive(index);
-    if (pauseAuto) stopAuto();
-  }
-
-  function next(pause = false) { goTo(index + 1, pause); }
-  function prev(pause = false) { goTo(index - 1, pause); }
-
-  // Knapp-klick
-  prevBtn?.addEventListener("click", () => prev(true));
-  nextBtn?.addEventListener("click", () => next(true));
-
-  // Tangentbord (vänster/höger)
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") prev(true);
-    if (e.key === "ArrowRight") next(true);
-  });
-
-  // Touch-swipe
-  let startX = 0;
-  slidesWrap.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-
-  slidesWrap.addEventListener("touchend", (e) => {
-    const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) {
-      dx > 0 ? prev(true) : next(true);
-    }
-  });
-
-  // Auto-play
-  function startAuto() {
-    if (autoTimer) return;
-    autoTimer = setInterval(() => next(false), AUTO_MS);
-  }
-  function stopAuto() {
-    clearInterval(autoTimer);
-    autoTimer = null;
-  }
-  // Pausa på hover (desktop)
-  slidesWrap.addEventListener("mouseenter", stopAuto);
-  slidesWrap.addEventListener("mouseleave", startAuto);
-
-  // Initiera
-  setActive(index);
-  startAuto();
-})();
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // script.js (Axios-version)
@@ -348,7 +225,37 @@ async function loadProjects() {
 document.addEventListener("DOMContentLoaded", loadProjects);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
+/* Beskrivning individ "LÄS MER" */
+  
+document.addEventListener('DOMContentLoaded', () => {
+  // Läs mer
+  const toggleBtn = document.querySelector('#about-toggle');
+  const more = document.querySelector('#about-extra');
+  const about = document.querySelector('.about');
 
+  if (toggleBtn && more && about) {
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      more.hidden = expanded;                 // visa/dölj för skärmläsare
+      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
+      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
+    });
+
+    // On-scroll reveal (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          about.classList.add('reveal');
+          io.unobserve(about);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(about);
+  }
+});
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* =========================================
    Skillsbar – komplett drop-in
    – Animerar först när sektionen syns i viewport
@@ -422,5 +329,96 @@ document.addEventListener("DOMContentLoaded", loadProjects);
       }
     }
   });
+})();
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Bildspel (prev/next, piltangenter, swipe, punkter) 
+(function initSlideshow() {
+  const slidesWrap = document.getElementById("slides");
+  if (!slidesWrap) return; // ingen slideshow på sidan
+
+  const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+  const dotsWrap = document.getElementById("dots");
+
+  if (slides.length === 0) return;
+
+  let index = 0;
+  let autoTimer = null;
+  const AUTO_MS = 5000; // ändra om du vill
+
+  // Skapa prickar
+  slides.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
+    dot.addEventListener("click", () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+
+  function setActive(newIndex) {
+    // Bilder
+    slides.forEach((img, i) => {
+      img.classList.toggle("active", i === newIndex);
+      img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
+      // lazy-ish: ladda först när den snart ska visas (om man använder data-src)
+      if (i === newIndex && img.dataset.src && !img.src) {
+        img.src = img.dataset.src;
+      }
+    });
+    // "Prickar"
+    const allDots = Array.from(dotsWrap.children);
+    allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
+  }
+
+  function goTo(newIndex, pauseAuto = false) {
+    index = (newIndex + slides.length) % slides.length;
+    setActive(index);
+    if (pauseAuto) stopAuto();
+  }
+
+  function next(pause = false) { goTo(index + 1, pause); }
+  function prev(pause = false) { goTo(index - 1, pause); }
+
+  // Knapp-klick
+  prevBtn?.addEventListener("click", () => prev(true));
+  nextBtn?.addEventListener("click", () => next(true));
+
+  // Tangentbord (vänster/höger)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prev(true);
+    if (e.key === "ArrowRight") next(true);
+  });
+
+  // Touch-swipe
+  let startX = 0;
+  slidesWrap.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  slidesWrap.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      dx > 0 ? prev(true) : next(true);
+    }
+  });
+
+  // Auto-play
+  function startAuto() {
+    if (autoTimer) return;
+    autoTimer = setInterval(() => next(false), AUTO_MS);
+  }
+  function stopAuto() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+  // Pausa på hover (desktop)
+  slidesWrap.addEventListener("mouseenter", stopAuto);
+  slidesWrap.addEventListener("mouseleave", startAuto);
+
+  // Initiera
+  setActive(index);
+  startAuto();
 })();
 
