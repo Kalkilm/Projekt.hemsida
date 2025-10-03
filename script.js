@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", loadProjects);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* Beskrivning individ "LÄS MER" */
-  
+
 document.addEventListener('DOMContentLoaded', () => {
   // Läs mer
   const toggleBtn = document.querySelector('#about-toggle');
