@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cleanedValue === "") {
       ok = false; msg = "Telefonnummer är obligatoriskt.";
     } else {
-      ok = /^[\d-]{7,12}$/.test(cleanedValue);
+      ok = /^\+?\d[\d-]{6,11}$/.test(cleanedValue);
       if (!ok) msg = "Endast siffror, 7–12 tecken.";
     }
 
