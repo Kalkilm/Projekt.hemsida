@@ -20,49 +20,51 @@
         <h1 class="title-1">Kontakta oss</h1>
 
         <p class="intro">
-        Har du frågor om medlemskap, träning eller vill bara säga hej?<br>
-        Fyll i formuläret så återkommer vi snarast.</p>
-        
+            Har du frågor om medlemskap, träning eller vill bara säga hej?<br>
+            Fyll i formuläret så återkommer vi snarast.</p>
+
     </header>
 
     <!-- Kontaktformulär -->
 
-            <form id="contactForm" novalidate>
+    <form id="contactForm" novalidate>
 
-                <!-- Fältet för Namn -->
-                <label for="name">Namn</label>
-                <div class="field-wrap">
-                    <input id="name" name="name" type="text" placeholder="Ditt namn" required aria-describedby="nameHelp" >
-                    <span class="checkmark" id="nameCheck" aria-hidden="true">✓</span>
-                </div>
-                <p id="nameHelp" class="feedback-text" aria-live="polite"></p>
+        <!-- Fältet för Namn -->
+        <label for="name">Namn</label>
+        <div class="field-wrap">
+            <input id="name" name="name" type="text" placeholder="Ditt namn" required aria-describedby="nameHelp">
+            <span class="checkmark" id="nameCheck" aria-hidden="true">✓</span>
+        </div>
+        <p id="nameHelp" class="feedback-text" aria-live="polite"></p>
 
-                <!-- Fältet för Telefon -->
-                <label for="phone">Telefon</label>
-                <div class="field-wrap">
-                    <input id="phone" name="phone" type="text" placeholder="070-123 45 67" required aria-describedby="phoneHelp" >
-                    <span class="checkmark" id="phoneCheck" aria-hidden="true">✓</span>
-                </div>
-                <p id="phoneHelp" class="feedback-text" aria-live="polite"></p>
+        <!-- Fältet för Telefon -->
+        <label for="phone">Telefon</label>
+        <div class="field-wrap">
+            <input id="phone" name="phone" type="text" placeholder="070-123 45 67" required
+                aria-describedby="phoneHelp">
+            <span class="checkmark" id="phoneCheck" aria-hidden="true">✓</span>
+        </div>
+        <p id="phoneHelp" class="feedback-text" aria-live="polite"></p>
 
-                <!-- Fältet för E-post -->
-                <label for="email">E-post</label>
-                <div class="field-wrap">
-                    <input id="email" name="email" type="text" placeholder="exempel@mejl.se" required aria-describedby="emailHelp" >
-                    <span class="checkmark" id="emailCheck" aria-hidden="true">✓</span>
-                </div>
-                <p id="emailHelp" class="feedback-text" aria-live="polite"></p>
+        <!-- Fältet för E-post -->
+        <label for="email">E-post</label>
+        <div class="field-wrap">
+            <input id="email" name="email" type="text" placeholder="exempel@mejl.se" required
+                aria-describedby="emailHelp">
+            <span class="checkmark" id="emailCheck" aria-hidden="true">✓</span>
+        </div>
+        <p id="emailHelp" class="feedback-text" aria-live="polite"></p>
 
-                <!-- Fältet för Meddelande -->
-                <label for="message">Meddelande</label>
-                <div class="field-wrap">
-                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här"></textarea>
-                </div>
+        <!-- Fältet för Meddelande -->
+        <label for="message">Meddelande</label>
+        <div class="field-wrap">
+            <textarea id="message" name="message" placeholder="Skriv ditt meddelande här"></textarea>
+        </div>
 
-                <!-- Skicka-knapp -->
-                <button id="submitBtn" type="submit">Skicka</button>
+        <!-- Skicka-knapp -->
+        <button id="submitBtn" type="submit">Skicka</button>
 
-            </form>
+    </form>
 
     <footer class="site-footer">
         <address>
