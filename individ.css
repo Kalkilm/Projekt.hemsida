@@ -1,16 +1,12 @@
 * {
   box-sizing: border-box;
 }
-
-
 /* Header (bild + text) */
-
 .profile-header {
   display: grid;
   gap: 1rem;
   align-items: center;
   padding: 1rem;
-  grid-template-columns: 240px 1fr;
 }
 
 .profile-photo {
@@ -71,15 +67,12 @@
   color: #374151;
 }
 
-
 .project-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
   transform: scale(1.01);
   transition: box-shadow .3s ease, transform .5s ease;
 }
-
 /* Skillsbar */
-
 /* Grundlayout för sektionen */
 #skills {
   max-width: 720px;
@@ -221,11 +214,6 @@
 .dot.active {
   background: #111827;
 }
-
-
-/* =========================================
-            Längre beskrivning 
-   ========================================= */
 /* Layout & läsbarhet för hela "Om Flex"-sektionen */
 .about {
   /* responsiv basmarginal runt sektionen */
@@ -233,12 +221,10 @@
 
   /* responsivt inre mellanrum (≈ 1.25 × marginalen ovan) */
   padding: calc(clamp(16px, 3vw, 28px) * 1.25);
-
   max-width: 1000px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, .06);
-
   /* starta lite nedsänkt + transparent för en mjuk "reveal" */
   transform: translateY(10px);
   opacity: 0;
@@ -342,8 +328,6 @@
 .about__facts li:last-child {
   border-bottom: 0;
 }
-
-
 /* =========================
    Filtrering 
    ========================= */

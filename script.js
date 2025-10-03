@@ -1,11 +1,9 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("navbar-container");
   if (!container) return;
 
-  // === 2) Skapa <nav class="navbar"> direkt ===
+  // === Skapa <nav class="navbar"> direkt ===
   container.innerHTML = `
     <nav class="navbar">
       <h1 class="logo-title">
@@ -26,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (navbar.dataset.init) return; // undvik dubbelinit
   navbar.dataset.init = "1";
 
-  // === 3) Menypunkter ===
+  // === Menypunkter ===
   const items = [
     { text: "Hem", href: "index.html" },
     { text: "Anställda", href: "employees.html" },
@@ -56,14 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   navbar.appendChild(ul);
 
-  // === 4) Toggle-logik för mobil ===
+  // === Toggle-logik för mobil ===
   toggleBtn?.addEventListener("click", () => {
     const open = ul.classList.toggle("open");
     if (menuIcon) menuIcon.textContent = open ? "menu_open" : "menu";
     toggleBtn.setAttribute("aria-expanded", String(open));
   });
 
-  // === 5) Stäng menyn efter klick ===
+  // === Stäng menyn efter klick ===
   ul.addEventListener("click", (e) => {
     if (e.target.matches(".liItem") && ul.classList.contains("open")) {
       ul.classList.remove("open");
@@ -83,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-
 
 /* ============================================================
    Helpers nedan: laddar Google-fonten "Material Symbols" via JS
@@ -119,126 +116,45 @@ function ensureMaterialSymbols() {
   document.head.appendChild(font);
 }
 
-
-// Bildspel (prev/next, piltangenter, swipe, punkter) 
-(function initSlideshow() {
-  const slidesWrap = document.getElementById("slides");
-  if (!slidesWrap) return; // ingen slideshow på sidan
-
-  const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
-  const prevBtn = document.getElementById("prev");
-  const nextBtn = document.getElementById("next");
-  const dotsWrap = document.getElementById("dots");
-
-  if (slides.length === 0) return;
-
-  let index = 0;
-  let autoTimer = null;
-  const AUTO_MS = 5000; // ändra om du vill
-
-  // Skapa prickar
-  slides.forEach((_, i) => {
-    const dot = document.createElement("button");
-    dot.className = "dot" + (i === 0 ? " active" : "");
-    dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
-    dot.addEventListener("click", () => goTo(i, true));
-    dotsWrap.appendChild(dot);
-  });
-
-  function setActive(newIndex) {
-    // bilder
-    slides.forEach((img, i) => {
-      img.classList.toggle("active", i === newIndex);
-      img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
-      // lazy-ish: ladda först när den snart ska visas (om du använder data-src)
-      if (i === newIndex && img.dataset.src && !img.src) {
-        img.src = img.dataset.src;
-      }
-    });
-    // prickar
-    const allDots = Array.from(dotsWrap.children);
-    allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
-  }
-
-  function goTo(newIndex, pauseAuto = false) {
-    index = (newIndex + slides.length) % slides.length;
-    setActive(index);
-    if (pauseAuto) stopAuto();
-  }
-
-  function next(pause = false) { goTo(index + 1, pause); }
-  function prev(pause = false) { goTo(index - 1, pause); }
-
-  // Knapp-klick
-  prevBtn?.addEventListener("click", () => prev(true));
-  nextBtn?.addEventListener("click", () => next(true));
-
-  // Tangentbord (vänster/höger)
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") prev(true);
-    if (e.key === "ArrowRight") next(true);
-  });
-
-  // Touch-swipe
-  let startX = 0;
-  slidesWrap.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-
-  slidesWrap.addEventListener("touchend", (e) => {
-    const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) {
-      dx > 0 ? prev(true) : next(true);
-    }
-  });
-
-  // Auto-play (valfritt)
-  function startAuto() {
-    if (autoTimer) return;
-    autoTimer = setInterval(() => next(false), AUTO_MS);
-  }
-  function stopAuto() {
-    clearInterval(autoTimer);
-    autoTimer = null;
-  }
-  // Pausa på hover (desktop)
-  slidesWrap.addEventListener("mouseenter", stopAuto);
-  slidesWrap.addEventListener("mouseleave", startAuto);
-
-  // Init
-  setActive(index);
-  startAuto();
-})();
-
-
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 // script.js (Axios-version)
 // === Projektlista: enkel textfiltrering över befintliga kort ===
+
+// Hämtar referenser till tre element i HTML: listbehållaren, sökfältet och räknaren.
 const projectContainer = document.getElementById("project-list");
 const projectQ = document.getElementById("project-q");
 const projectCount = document.getElementById("project-count");
-let allProjects = [];
+let allProjects = []; // Här sparas alla projekt som läses in från projects.json
 
+// normalize: gör sökningar robusta
+// - gör om till sträng, små bokstäver
+// - normaliserar Unicode (NFD) så å/ä/ö bryts upp i a + diakritik
+// - tar bort diakritiska tecken (så "Å" matchar "a")
 const normalize = (s) =>
   (s ?? "").toString().toLowerCase()
     .normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
+// Visar en statusrad i listbehållaren och nollställer räknaren
 function setStatus(msg) {
   if (projectContainer) projectContainer.innerHTML = `<p class="status">${msg}</p>`;
   if (projectCount) projectCount.textContent = "";
 }
 
+// Bygger ett “kort” (article) för ett projekt-objekt { titel, kund, beskrivning }
 function createProjectCard(proj) {
   const card = document.createElement("article");
   card.className = "project-card";
 
+  // titeln
   const h3 = document.createElement("h3");
   h3.textContent = proj.titel || "Namnlöst projekt";
 
+  // kund
   const meta = document.createElement("p");
   meta.className = "project-meta";
   meta.textContent = proj.kund ? `Kund: ${proj.kund}` : "Kund: –";
 
+  // beskrivning
   const desc = document.createElement("p");
   desc.className = "project-desc";
   desc.textContent = proj.beskrivning || "";
@@ -247,33 +163,40 @@ function createProjectCard(proj) {
   return card;
 }
 
+// Renderar en lista av projekt i DOM:en
 function renderProjects(list) {
   if (!projectContainer) return;
   projectContainer.innerHTML = "";
 
+  // Tom träfflista -> visa statusmeddelande
   if (!list || list.length === 0) {
     setStatus("Inga projekt matchar din sökning.");
     return;
   }
 
+  // DocumentFragment minskar “omritningar” (performance)
   const frag = document.createDocumentFragment();
   list.forEach(p => frag.appendChild(createProjectCard(p)));
   projectContainer.appendChild(frag);
 
+  // Uppdatera räknaren
   if (projectCount) projectCount.textContent = `${list.length} projekt`;
 }
 
+// Läser söksträng, filtrerar allProjects och renderar resultatet
 function computeAndRender() {
   const q = normalize(projectQ?.value.trim() || "");
   const filtered = !q
-    ? allProjects
+    ? allProjects // tom söksträng -> visa allt
     : allProjects.filter(p => {
+      // “höstack”: titel + kund + beskrivning i en sträng, normaliserad
       const hay = normalize(`${p.titel} ${p.kund} ${p.beskrivning}`);
-      return hay.includes(q);
+      return hay.includes(q); // enkel substring-matchning
     });
   renderProjects(filtered);
 }
 
+// debounce: väntar X ms efter senaste tangenttryck innan filtrering körs
 function debounce(fn, ms = 150) {
   let t;
   return (...args) => {
@@ -282,6 +205,7 @@ function debounce(fn, ms = 150) {
   };
 }
 
+// Hämtar projects.json via Axios, sparar inläst data och aktiverar realtidsfilter
 async function loadProjects() {
   try {
     setStatus("Laddar projekt…");
@@ -289,7 +213,7 @@ async function loadProjects() {
     allProjects = Array.isArray(res.data) ? res.data : [];
     computeAndRender();
 
-    // realtidsfilter
+    // Realtidsfilter: lyssna på input men “debounca” för bättre flyt
     projectQ?.addEventListener("input", debounce(computeAndRender, 150));
   } catch (err) {
     console.error("[loadProjects] FEL:", err);
@@ -297,8 +221,41 @@ async function loadProjects() {
   }
 }
 
+// Startpunkten: när HTML laddats, hämta projekten
 document.addEventListener("DOMContentLoaded", loadProjects);
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+/* Beskrivning individ "LÄS MER" */
+  
+document.addEventListener('DOMContentLoaded', () => {
+  // Läs mer
+  const toggleBtn = document.querySelector('#about-toggle');
+  const more = document.querySelector('#about-extra');
+  const about = document.querySelector('.about');
+
+  if (toggleBtn && more && about) {
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      more.hidden = expanded;                 // visa/dölj för skärmläsare
+      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
+      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
+    });
+
+    // On-scroll reveal (IntersectionObserver)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          about.classList.add('reveal');
+          io.unobserve(about);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(about);
+  }
+});
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* =========================================
    Skillsbar – komplett drop-in
    – Animerar först när sektionen syns i viewport
@@ -374,33 +331,94 @@ document.addEventListener("DOMContentLoaded", loadProjects);
   });
 })();
 
-/* =========================================
-        Längre beskrivning individ 
-  =========================================*/
-document.addEventListener('DOMContentLoaded', () => {
-  // Läs mer
-  const toggleBtn = document.querySelector('#about-toggle');
-  const more = document.querySelector('#about-extra');
-  const about = document.querySelector('.about');
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Bildspel (prev/next, piltangenter, swipe, punkter) 
+(function initSlideshow() {
+  const slidesWrap = document.getElementById("slides");
+  if (!slidesWrap) return; // ingen slideshow på sidan
 
-  if (toggleBtn && more && about) {
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      more.hidden = expanded;                 // visa/dölj för skärmläsare
-      about.classList.toggle('is-expanded', !expanded); // styr CSS-transition
-      toggleBtn.textContent = expanded ? 'Läs mer' : 'Visa mindre';
+  const slides = Array.from(slidesWrap.querySelectorAll(".slide"));
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+  const dotsWrap = document.getElementById("dots");
+
+  if (slides.length === 0) return;
+
+  let index = 0;
+  let autoTimer = null;
+  const AUTO_MS = 5000; // ändra om du vill
+
+  // Skapa prickar
+  slides.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", `Gå till bild ${i + 1}`);
+    dot.addEventListener("click", () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+
+  function setActive(newIndex) {
+    // Bilder
+    slides.forEach((img, i) => {
+      img.classList.toggle("active", i === newIndex);
+      img.setAttribute("aria-hidden", i === newIndex ? "false" : "true");
+      // lazy-ish: ladda först när den snart ska visas (om man använder data-src)
+      if (i === newIndex && img.dataset.src && !img.src) {
+        img.src = img.dataset.src;
+      }
     });
-
-    // On-scroll reveal (IntersectionObserver)
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          about.classList.add('reveal');
-          io.unobserve(about);
-        }
-      });
-    }, { threshold: 0.2 });
-    io.observe(about);
+    // "Prickar"
+    const allDots = Array.from(dotsWrap.children);
+    allDots.forEach((d, i) => d.classList.toggle("active", i === newIndex));
   }
-});
+
+  function goTo(newIndex, pauseAuto = false) {
+    index = (newIndex + slides.length) % slides.length;
+    setActive(index);
+    if (pauseAuto) stopAuto();
+  }
+
+  function next(pause = false) { goTo(index + 1, pause); }
+  function prev(pause = false) { goTo(index - 1, pause); }
+
+  // Knapp-klick
+  prevBtn?.addEventListener("click", () => prev(true));
+  nextBtn?.addEventListener("click", () => next(true));
+
+  // Tangentbord (vänster/höger)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prev(true);
+    if (e.key === "ArrowRight") next(true);
+  });
+
+  // Touch-swipe
+  let startX = 0;
+  slidesWrap.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  slidesWrap.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      dx > 0 ? prev(true) : next(true);
+    }
+  });
+
+  // Auto-play
+  function startAuto() {
+    if (autoTimer) return;
+    autoTimer = setInterval(() => next(false), AUTO_MS);
+  }
+  function stopAuto() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+  // Pausa på hover (desktop)
+  slidesWrap.addEventListener("mouseenter", stopAuto);
+  slidesWrap.addEventListener("mouseleave", startAuto);
+
+  // Initiera
+  setActive(index);
+  startAuto();
+})();
+

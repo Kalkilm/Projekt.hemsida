@@ -118,15 +118,3 @@
     height: 260px;
   }
 }
-
-@media (min-width: 700px) {
-    .team-grid {
-        grid-template-columns: 1fr 1fr;
-        align-items: stretch;
-    }
-
-    /* @media (min-width: 700px) – gäller bara skärmar ≥ 700px (mobile-first).
-    
-.team-grid { grid-template-columns: 1fr 1fr; } – två lika breda kolumner.
-align-items: stretch; – gör grid-items lika höga inom varje rad.*/
-}

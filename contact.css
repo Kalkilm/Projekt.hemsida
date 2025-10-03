@@ -1,30 +1,24 @@
-.contact-section {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-  min-height: 50%;
-}
-
+/* Korten för kontaktformuläret */
 #contactForm {
-  max-width: 300px;            
+  max-width: 300px;
   width: 100%;
-  margin: 1.5rem auto;         
-  padding: 25px;               
-  display: flex;
-  flex-direction: column;
+  margin: 1.5rem auto; /* marginal upp + ner, centrerar automatiskt */
+  padding: 25px;
+  display: flex; /* Gör formuläret till flex-container */
+  flex-direction: column; /* alla inputs och labels läggs på rad ovanpå varandra */
   background: white;
   border-radius: 10px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-/*  Fälten  */
+/* Textfälten */
 #contactForm label {
   font-weight: bold;
   margin: 2px 0 2px;
-  display: block;
-  /* gör att label hamnar på egen rad */
+  display: block; /* gör så labeln tar upp hela bredden, får en egen rad*/
 }
 
+/* gör så textfält, meddelandefält och knappen fyller ut hela bredden på formuläret */
 #contactForm input,
 #contactForm textarea,
 #contactForm button {
@@ -36,7 +30,7 @@
   box-sizing: border-box;
 }
 
-/*  Textarea lite högre  */
+/* Meddelandefältet görs lite högre än övriga text-fält */
 #contactForm textarea {
   min-height: 70px;
   resize: vertical;
@@ -48,20 +42,21 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
-  border: none;
   transition: background 0.5s;
 }
 
-.checkmark {
-  color: green;
-  display: none;
-}
-
+/* Knappens färg blir mörkare när man hoovrar över det */
 #contactForm button:hover {
   background: #165e19;
 }
 
+/* Checkmarken för giltiga fält */
+.checkmark {
+  color: green;
+  display: none; /* gömmer den initialt */
+}
 
+/* används för att kunna positionera checkmarken nedan till höger i textfältet */
 .field-wrap {
   position: relative;
 }
@@ -76,6 +71,7 @@
   pointer-events: none;
 }
 
+/* gör så checkmarken visas när fältet är giltigt */
 .checkmark.visible {
   display: inline-block;
 }
@@ -86,13 +82,7 @@
   font-size: 0.9rem;
   color: red;
   min-height: 1em;
-  line-height: 1.2;
-  /* behåll utrymmet även när det är tomt */
-}
-
-/* Feedback-texten grön när det är valid */
-.feedback-text.valid {
-  color: green;
+  line-height: 1.2; /* behåller "tomma" utrymmet även när det är tomt, undivker att det hoppar */
 }
 
 /* Knappens utseende när den är disabled */
