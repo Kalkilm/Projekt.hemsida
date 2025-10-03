@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Min profilsida</title>
+  <title>NKK - Johan Palmqvist</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="individ.css">
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    rel="stylesheet">
   <script src="script.js" defer></script>
 
 </head>
@@ -23,10 +24,10 @@
   <header class="profile-header">
     <img class="profile-photo" src="bilder/Johan.profil.png" alt="Profilbild">
     <div>
-      <h1>Flex Finstrong</h1>
+      <h1>Johan Palmqvist</h1>
       <p class="info">
         Styrkecoach och instruktör med fokus på teknik i bänk, knäböj och marklyft.
-        Hjälper nybörjare komma igång och tävlingslyftare att vässa detaljerna.
+        Jag hjälper dig som nybörjare att komma igång och tävlingslyftare att vässa detaljerna.
       </p>
     </div>
   </header>
@@ -34,20 +35,28 @@
   <section class="about" id="about" aria-labelledby="about-title">
     <div class="about__grid">
       <div class="about__content">
-        <h2 id="about-title">Om Jonas</h2>
+        <h2 id="about-title">Om Johan</h2>
         <p>
-          Jag hjälper allt från nybörjare till tävlingslyftare att lyfta smartare – inte bara tyngre.
-          Min metod bygger på teknikförståelse, skonsam progression och mätbara delmål.
+          Jag hjälper dig att bygga styrka på ett hållbart sätt – oavsett om du är ny på gymmet eller vill ta din
+          träning
+          till nästa nivå. Min filosofi handlar om bra teknik, smart planering och tydliga mål längs vägen.
+          säkerställa att du hela tiden blir bättre.
         </p>
         <div id="about-extra" class="about__more" hidden>
           <p>
-            Under passen filmar vi nyckellyft, bryter ner rörelsen och bygger ett personligt fokuskort
-            för bänk/knäböj/mark. Varje block avslutas med en kort checkpoint där vi följer upp rörlighet,
-            toppset och RPE för att styra nästa block.
+            Förutom personlig träning erbjuder jag även styrkeworkshops för grupper och lag, samt onlinecoaching med
+            individuell återkoppling varje vecka.
+
+            Mitt mål är att ge dig mer än bara ett träningspass – jag vill att du ska förstå varför vi gör som vi gör.
+            Därför lägger jag stor vikt vid att förklara upplägg, periodisering och hur olika träningsblock bygger
+            vidare på varandra.
+            Det ger dig kunskapen att träna smart även på egen hand.
           </p>
           <p>
-            Utöver lyftarcoaching erbjuder jag workshops för lag/föreningar, samt distansupplägg med
-            veckovis feedback i video.
+            Oavsett om du vill bli starkare i knäböj, förbättra din bänkpress eller utveckla en trygg marklyftsteknik så
+            får du verktygen för att nå dit.
+            Tillsammans sätter vi upp delmål som är både realistiska och inspirerande, så att din resa mot ökad styrka
+            blir långsiktig, hållbar och rolig.
           </p>
         </div>
 
@@ -59,18 +68,19 @@
       <aside class="about__aside" aria-label="Snabbfakta">
         <ul class="about__facts">
           <li>Lic. PT & styrkecoach</li>
-          <li>Specialist: knäböj • bänkpress • marklyft</li>
-          <li>Videoanalys & fokuskort</li>
-          <li>Workshops & distans</li>
+          <li>Basövningar & styrkelyft</li>
+          <li>Teknikfokus & progressionsplan</li>
+          <li>Personlig träning & onlinecoaching</li>
         </ul>
       </aside>
+
     </div>
   </section>
 
   <main>
     <!-- Projekt (inläses från JSON) -->
     <section id="projects">
-      <h2>Mina projekt</h2>
+      <h1 class="title-1" >Mina projekt</h1>
 
       <!-- Filtreringsruta -->
       <div class="project-controls" aria-label="Filtrera projekt">
@@ -92,10 +102,10 @@
       <h2 id="skills-heading">Kompetenser</h2>
 
       <ul class="skills-list" role="list">
-        <li class="skill" data-percent="85">
+        <li class="skill" data-percent="30">
           <div class="skill-row">
             <span class="skill-label">Styrka</span>
-            <span class="skill-value" aria-hidden="true">85%</span>
+            <span class="skill-value" aria-hidden="true">30%</span>
           </div>
           <div class="skill-track" role="progressbar" aria-label="HTML" aria-valuemin="0" aria-valuemax="100"
             aria-valuenow="0">
@@ -103,10 +113,10 @@
           </div>
         </li>
 
-        <li class="skill" data-percent="75">
+        <li class="skill" data-percent="50">
           <div class="skill-row">
-            <span class="skill-label">Rörlighet</span>
-            <span class="skill-value" aria-hidden="true">75%</span>
+            <span class="skill-label">Se stark ut</span>
+            <span class="skill-value" aria-hidden="true">50%</span>
           </div>
           <div class="skill-track" role="progressbar" aria-label="CSS" aria-valuemin="0" aria-valuemax="100"
             aria-valuenow="0">
@@ -114,10 +124,10 @@
           </div>
         </li>
 
-        <li class="skill" data-percent="80">
+        <li class="skill" data-percent="95">
           <div class="skill-row">
             <span class="skill-label">Kundbetyg</span>
-            <span class="skill-value" aria-hidden="true">80%</span>
+            <span class="skill-value" aria-hidden="true">95%</span>
           </div>
           <div class="skill-track" role="progressbar" aria-label="JavaScript" aria-valuemin="0" aria-valuemax="100"
             aria-valuenow="0">
@@ -131,9 +141,9 @@
     <section class="slideshow" aria-label="Bildspel">
       <h2>Bildspel</h2>
       <div class="slides" id="slides" role="region" aria-live="polite">
-        <img src="bilder/flex_knäböj_1536x1024.png" alt="Träningsbild 1" class="slide active">
-        <img src="bilder/flex_bänk.png" alt="Träningsbild 2" class="slide">
-        <img src="bilder/flex_marklyft_1536x1024.png" alt="Träningsbild 3" class="slide">
+        <img src="bilder/slide_show_bild_1_JP.jpg" alt="Träningsbild 1" class="slide active">
+        <img src="bilder/slide_show_bild_2_JP.jpg" alt="Träningsbild 2" class="slide">
+        <img src="bilder/slide_show_bild_3_JP.jpg" alt="Träningsbild 3" class="slide">
       </div>
       <div class="controls">
         <button class="nav" id="prev" aria-label="Föregående bild">‹</button>
@@ -142,7 +152,7 @@
       <div class="dots" id="dots"></div>
     </section>
 
-   
+
   </main>
 
   <footer class="site-footer">
