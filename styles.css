@@ -5,9 +5,8 @@ body {
   background: #fff;
   color: #000;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-  /* behåll Poppins */
   line-height: 1.6;
-  /* tog med från din andra body-regel */
+  
 }
 
 .header-container,
@@ -112,7 +111,7 @@ body {
 }
 
 .logo {
-   height:3em;          /* 3 × textens storlek */
+  height:3em;          /* 3 × textens storlek */
   width:auto;
   display: inline-block;
   vertical-align: middle;
@@ -129,7 +128,6 @@ body {
   letter-spacing: normal;
   line-height: 1;
   display: inline-block;
-  /* valfritt – dina tidigare värden */
   width: 32px;
   text-align: center;
   font-size: 32px;
